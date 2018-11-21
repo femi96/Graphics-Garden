@@ -18,7 +18,7 @@
 	{
 		"AStyleFormatter":
 		{	
-			// "autoformat_on_save": true,
+			"autoformat_on_save": true,
 			"options_default":
 			{
 				"style": "google",

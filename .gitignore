@@ -56,3 +56,4 @@ cmd = '<C:\Program Files\Unity\Editor\Data\Tools\UnityYAMLMerge.exe>' merge -p "
 .gitattributes
 clevr.sublime-project
 clevr.sublime-workspace
+*.sublime-project
