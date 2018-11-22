@@ -2,36 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FractalBinaryTree : MonoBehaviour {
+public class FractalBinaryTree : SystemGenerator {
 
+  public override void CreateSystem() {
+    lSystem = new LindenmayerSystem("0");
+    lSystem.AddRule('[', new LTerminal());
+    lSystem.AddRule(']', new LTerminal());
+    lSystem.AddRule('0', new LVariable("1[0]0"));
+    lSystem.AddRule('1', new LVariable("11"));
+  }
+
+  // Game objects
   public GameObject segment;
   public GameObject leaf;
-
-  public int steps = 3;
-  public bool reset = true;
-
-  void Update() {
-
-    if (reset) {
-      // Create L-System with production rules
-      LindenmayerSystem lSystem = new LindenmayerSystem("0");
-      lSystem.AddRule('[', new LTerminal());
-      lSystem.AddRule(']', new LTerminal());
-      lSystem.AddRule('0', new LVariable("1[0]0"));
-      lSystem.AddRule('1', new LVariable("11"));
-
-      // Step L-System steps times
-      int i = 0;
-
-      while (i < steps) {
-        i = lSystem.Step();
-      }
-
-      // Generate mesh from L-System
-      GenerateFromState(lSystem);
-      reset = false;
-    }
-  }
 
   // LIFO save stack placement
   private Vector3 currentPos;
@@ -40,7 +23,7 @@ public class FractalBinaryTree : MonoBehaviour {
   private List<Vector3> positionStack;
   private List<Quaternion> rotationStack;
 
-  private void GenerateFromState(LindenmayerSystem lSystem) {
+  public override void GenerateFromState() {
 
     foreach (Transform child in transform) {
       GameObject.Destroy(child.gameObject);
