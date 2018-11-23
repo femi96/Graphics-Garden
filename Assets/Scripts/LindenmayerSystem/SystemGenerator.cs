@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class SystemGenerator : MonoBehaviour {
 
   public LindenmayerSystem lSystem;
-  public int steps = 0;
+  public int steps = 2;
   public bool reset = true;
 
   void Update() {
