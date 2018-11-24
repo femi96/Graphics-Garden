@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 1440251820}
   - component: {fileID: 1440251819}
   m_Layer: 0
-  m_Name: Boid
+  m_Name: Boids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,9 +458,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
-  numParticles: 50
-  particleObj: {fileID: 1506931937630334, guid: 50fb003c4b2a06840be9054bd95ab723,
-    type: 2}
+  numBoids: 20
+  boidObj: {fileID: 1506931937630334, guid: 50fb003c4b2a06840be9054bd95ab723, type: 2}
+  BoidSpeed: 1
+  BoidSpeedDragConstant: 1
+  FlockMinDistance: 0.6
+  FlockMaxDistance: 0.8
+  BoundaryDistance: 4
+  WeightSeparation: 1
+  WeightAlignment: 1
+  WeightCohesion: 1
+  WeightNoise: 0.2
+  WeightAvoidance: 4
 --- !u!4 &1440251820
 Transform:
   m_ObjectHideFlags: 0
