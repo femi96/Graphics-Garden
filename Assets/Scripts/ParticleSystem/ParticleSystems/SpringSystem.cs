@@ -29,13 +29,11 @@ public class SpringSystem : ParticleSystemCustom {
     // State is (x, v)
     state = new Vector3[numParticles * 2];
 
-    // x
     for (int i = 0; i < numParticles; ++i)
-      state[i] = new Vector3(i, 0, 0);
+      state[i] = new Vector3(i, 0, 0); // x
 
-    // v
     for (int i = numParticles; i < numParticles * 2; ++i)
-      state[i] = new Vector3();
+      state[i] = new Vector3(); // v
 
     // Add springs
     springPairs = new List<int>();
