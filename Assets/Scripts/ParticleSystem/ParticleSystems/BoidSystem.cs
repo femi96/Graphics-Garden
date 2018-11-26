@@ -94,6 +94,7 @@ public class BoidSystem : ParticleSystemCustom {
       accel[i] += Random.onUnitSphere * Random.Range(0, WeightNoise);
       // Limit
       accel[i] += WeightAvoidance * -boidPos.normalized * Mathf.Max(0, boidPos.magnitude - BoundaryDistance);
+      accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 1));
 
       // Speed control
       accel[i] += BoidSpeedDragConstant * (BoidSpeed - boidVel.magnitude) * boidVel.normalized;
