@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoidSystem : ParticleSystemCustom {
 
   public int numBoids = 20;
+  private bool[] activeBoids;
 
   public GameObject boidObj;
   private GameObject[] boidObjects;
@@ -34,21 +35,19 @@ public class BoidSystem : ParticleSystemCustom {
       GameObject.Destroy(child.gameObject);
 
 
+    // Active boids
+    activeBoids = new bool[numBoids];
+
+    for (int i = numBoids; i < numBoids; ++i)
+      activeBoids[i] = false;
+
+
     // State is (x, v)
     state = new Vector3[numBoids * 2];
-
-    for (int i = 0; i < numBoids; ++i)
-      state[i] = Random.onUnitSphere * Random.Range(-5, 5); // x
-
-    for (int i = numBoids; i < numBoids * 2; ++i)
-      state[i] = Random.onUnitSphere; // v
-
-
-    // Create render objects
     boidObjects = new GameObject[numBoids];
 
     for (int i = 0; i < numBoids; ++i)
-      boidObjects[i] = Instantiate(boidObj, state[i], Quaternion.identity, transform);
+      ResetParticle(i);
   }
 
   public override Vector3[] EvalF(Vector3[] evalState) {
@@ -62,6 +61,10 @@ public class BoidSystem : ParticleSystemCustom {
 
     for (int i = 0; i < numBoids; ++i) {
       accel[i] = new Vector3();
+
+      if (!activeBoids[i]) // Don't calculate if not active
+        continue;
+
       Vector3 boidPos = evalState[i];
       Vector3 boidVel = evalState[numBoids + i];
 
@@ -69,6 +72,9 @@ public class BoidSystem : ParticleSystemCustom {
       List<int> flockIndices = new List<int>();
 
       for (int j = 0; j < numBoids; ++j) {
+        if (!activeBoids[i]) // Don't calculate if not active
+          continue;
+
         Vector3 frenPos = evalState[j];
         Vector3 deltaPos = boidPos - frenPos;
 
@@ -105,6 +111,12 @@ public class BoidSystem : ParticleSystemCustom {
     Vector3[] newState = new Vector3[numBoids * 2];
 
     for (int i = 0; i < numBoids; ++i) {
+      if (!activeBoids[i]) {
+        newState[i] = new Vector3();
+        newState[i + numBoids] = new Vector3();
+        continue;
+      }
+
       newState[i] = evalState[numBoids + i];
       newState[i + numBoids] = accel[i];
     }
@@ -121,5 +133,50 @@ public class BoidSystem : ParticleSystemCustom {
     }
   }
 
-  public override void ResetParticles() {} // Never resets particles
+  [Header("Particle Spawn Settings")]
+  private float spawnTime = 0f;
+  public float spawnRate = 1f;
+
+  public override void ResetParticles() {
+    spawnTime += Time.deltaTime;
+
+    if (spawnTime > spawnRate) {
+      AddParticle();
+      spawnTime -= spawnRate;
+    }
+  }
+
+  private void ResetParticle(int i) {
+
+    // State is (x, v)
+    state[i] = Random.onUnitSphere * Random.Range(-5, 5); // x
+    state[i + numBoids] = Random.onUnitSphere; // v
+
+    GameObject.Destroy(boidObjects[i]);
+
+    boidObjects[i] = Instantiate(boidObj, state[i], Quaternion.identity, transform);
+    boidObjects[i].SetActive(activeBoids[i]);
+  }
+
+  private void AddParticle() {
+    int j = -1;
+
+    for (int i = 0; i < numBoids; ++i) {
+      if (!activeBoids[i]) {
+        j = i;
+        break;
+      }
+    }
+
+    if (j == -1)
+      return;
+
+    activeBoids[j] = true;
+    ResetParticle(j);
+  }
+
+  private void RemoveParticle(int i) {
+    activeBoids[i] = false;
+    boidObjects[i].SetActive(activeBoids[i]);
+  }
 }
