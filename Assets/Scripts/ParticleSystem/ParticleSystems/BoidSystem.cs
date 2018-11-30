@@ -28,6 +28,9 @@ public class BoidSystem : ParticleSystemCustom {
   public float WeightNoise = 0.2f;
   public float WeightAvoidance = 1.0f;
 
+  [Header("Spawn Settings")]
+  public float SpawnRange = 5;
+
   public override void CreateState() {
 
     // Clear child objects
@@ -100,7 +103,7 @@ public class BoidSystem : ParticleSystemCustom {
       accel[i] += Random.onUnitSphere * Random.Range(0, WeightNoise);
       // Limit
       accel[i] += WeightAvoidance * -boidPos.normalized * Mathf.Max(0, boidPos.magnitude - BoundaryDistance);
-      accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 1));
+      accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 2));
 
       // Speed control
       accel[i] += BoidSpeedDragConstant * (BoidSpeed - boidVel.magnitude) * boidVel.normalized;
@@ -149,8 +152,8 @@ public class BoidSystem : ParticleSystemCustom {
   private void ResetParticle(int i) {
 
     // State is (x, v)
-    state[i] = Random.onUnitSphere * Random.Range(-5, 5); // x
-    state[i + numBoids] = Random.onUnitSphere; // v
+    state[i] = Random.onUnitSphere * Random.Range(-SpawnRange, SpawnRange); // x
+    state[i + numBoids] = (Random.onUnitSphere + Vector3.up).normalized; // v
 
     GameObject.Destroy(boidObjects[i]);
 
