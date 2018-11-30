@@ -9,7 +9,7 @@ public class LindenmayerSystem {
   L-System state is represented by state string.
   */
 
-  private int steps;
+  public int steps;
   private string state;
   private Dictionary<char, ProductionRule> productionRules;
 

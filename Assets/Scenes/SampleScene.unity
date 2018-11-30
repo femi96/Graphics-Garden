@@ -511,7 +511,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 677353879}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &677353882
 Transform:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ MonoBehaviour:
   reset: 1
   segmentSides: 4
   meshScaleL: 0.1
-  meshScaleW: 0.05
+  meshScaleW: 0.25
 --- !u!1 &1002552632
 GameObject:
   m_ObjectHideFlags: 0
