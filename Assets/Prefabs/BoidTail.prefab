@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4054106015549676}
-  - component: {fileID: 114521838740137714}
+  - component: {fileID: 114264057663944604}
   m_Layer: 0
-  m_Name: ShapeSpring
+  m_Name: ShapeRope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4347644410377694}
   m_Layer: 0
-  m_Name: BoidSpring
+  m_Name: BoidTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1201953873613236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4347644410377694}
@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 1843062711483958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.05, z: 0.2}
+  m_LocalScale: {x: 0.2, y: 0.05, z: 0.2}
   m_Children: []
   m_Father: {fileID: 4347644410377694}
   m_RootOrder: 3
@@ -288,7 +288,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1752343823066368}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114521838740137714
+--- !u!114 &114264057663944604
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -296,16 +296,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1201953873613236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c8fd3b99263a849b77d7c01d4fb495, type: 3}
+  m_Script: {fileID: 11500000, guid: 13e053f5302715d4eb7f0b94f1441aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: []
   reset: 1
-  numParticles: 6
+  numParticles: 12
   fixedParticles: 00000000
   particleObj: {fileID: 1843062711483958}
   Gravity: 10
   ParticleMass: 0.01
-  ParticleDrag: 0.5
-  SpringConstant: 10
-  SpringDistance: 0.1
+  ParticleDrag: 0.3
+  SpringConstant: 5
+  SpringDistance: 0.2
