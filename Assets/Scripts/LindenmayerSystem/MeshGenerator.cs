@@ -11,6 +11,9 @@ public abstract class MeshGenerator : SystemGenerator {
   private List<Vector3> vertices;
   private List<int> triangles;
 
+  [Header("Mesh Generator Settings")]
+  public int segmentSides = 3; // Must be greater than 3
+
   public void CreateMesh() {
     mesh = new Mesh();
     vertices = new List<Vector3>();
@@ -23,8 +26,8 @@ public abstract class MeshGenerator : SystemGenerator {
     int z = vertices.Count;
     Quaternion zRotation = Quaternion.LookRotation(normal, Vector3.up);
 
-    for (int i = 0; i < 4; i++) {
-      float rad = 2f * Mathf.PI * i / 4;
+    for (int i = 0; i < segmentSides; i++) {
+      float rad = 2f * Mathf.PI * i / segmentSides;
       Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
       vertices.Add(point + (zRotation * v).normalized * width);
     }
@@ -34,44 +37,31 @@ public abstract class MeshGenerator : SystemGenerator {
 
   public void AddSegment(int p1, int p2) {
 
-    int offset = 0;
-    float dist = (vertices[p1] - vertices[p2 + 0]).magnitude;
+    int offset = -1;
+    float lowestSum = 0f;
 
-    for (int i = 0; i < 4; i++) {
-      float newDist = (vertices[p1] - vertices[p2 + i]).magnitude;
+    for (int i = 0; i < segmentSides; i++) {
+      float sum = 0f;
 
-      if (newDist < dist) {
+      for (int j = 0; j < segmentSides; j++) {
+        sum += (vertices[p1 + j] - vertices[p2 + (j + i) % segmentSides]).magnitude;
+      }
+
+      if (offset == -1 || sum < lowestSum) {
         offset = i;
+        lowestSum = sum;
       }
     }
 
-    triangles.Add(p1 + 0);
-    triangles.Add(p2 + (0 + offset) % 4);
-    triangles.Add(p1 + 1);
-    triangles.Add(p2 + (0 + offset) % 4);
-    triangles.Add(p2 + (1 + offset) % 4);
-    triangles.Add(p1 + 1);
+    for (int i = 0; i < segmentSides; i++) {
 
-    triangles.Add(p1 + 1);
-    triangles.Add(p2 + (1 + offset) % 4);
-    triangles.Add(p1 + 2);
-    triangles.Add(p2 + (1 + offset) % 4);
-    triangles.Add(p2 + (2 + offset) % 4);
-    triangles.Add(p1 + 2);
-
-    triangles.Add(p1 + 2);
-    triangles.Add(p2 + (2 + offset) % 4);
-    triangles.Add(p1 + 3);
-    triangles.Add(p2 + (2 + offset) % 4);
-    triangles.Add(p2 + (3 + offset) % 4);
-    triangles.Add(p1 + 3);
-
-    triangles.Add(p1 + 3);
-    triangles.Add(p2 + (3 + offset) % 4);
-    triangles.Add(p1 + 0);
-    triangles.Add(p2 + (3 + offset) % 4);
-    triangles.Add(p2 + (0 + offset) % 4);
-    triangles.Add(p1 + 0);
+      triangles.Add(p1 + i % segmentSides);
+      triangles.Add(p2 + (i + offset) % segmentSides);
+      triangles.Add(p1 + (i + 1) % segmentSides);
+      triangles.Add(p2 + (i + offset) % segmentSides);
+      triangles.Add(p2 + (i + 1 + offset) % segmentSides);
+      triangles.Add(p1 + (i + 1) % segmentSides);
+    }
   }
 
   public void UpdateMesh() {

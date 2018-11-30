@@ -59,7 +59,7 @@ public class FractalBinaryTreeMesh : MeshGenerator {
         currentPos += upRel;
         currentPoint = p1;
 
-        p2 = AddPoint(currentPos + upRel * 1f, upRel, 0.0f);
+        p2 = AddPoint(currentPos + upRel * 1f, upRel, 0.001f);
         AddSegment(p1, p2);
         break;
 

@@ -538,8 +538,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steps: 5
   reset: 1
+  segmentSides: 4
   meshScaleL: 0.1
-  meshScaleW: 0.075
+  meshScaleW: 0.05
 --- !u!1 &1002552632
 GameObject:
   m_ObjectHideFlags: 0
