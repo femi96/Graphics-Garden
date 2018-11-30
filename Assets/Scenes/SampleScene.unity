@@ -437,6 +437,7 @@ MonoBehaviour:
   WeightCohesion: 1
   WeightNoise: 0.2
   WeightAvoidance: 4
+  SpawnRange: 5
   spawnRate: 1
 --- !u!4 &616204091
 Transform:
@@ -484,7 +485,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e7e68a4e88780fe4c9ff636bf7ab0dbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -535,9 +536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f0a73ffb0b3a349ba0f4ba81b704c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steps: 4
+  steps: 5
   reset: 1
-  segment: {fileID: 1717769190295532, guid: b32541779405b7a4385e14681b9c4384, type: 2}
+  meshScaleL: 0.1
+  meshScaleW: 0.075
 --- !u!1 &1002552632
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +572,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1e49bdd61eff7b84eacdc6ef6c0259f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -753,6 +755,7 @@ MonoBehaviour:
   WeightCohesion: 1
   WeightNoise: 0.2
   WeightAvoidance: 4
+  SpawnRange: 5
   spawnRate: 1
 --- !u!4 &1440251820
 Transform:

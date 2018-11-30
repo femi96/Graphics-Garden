@@ -18,53 +18,60 @@ public abstract class MeshGenerator : SystemGenerator {
     GetComponent<MeshFilter>().mesh = mesh;
   }
 
-  public void AddSegment(Vector3 p1, Vector3 p2, float w1, float w2) {
-    Vector3 p1t2 = p2 - p1;
-    Quaternion zRotation = Quaternion.LookRotation(p1t2, Vector3.up);
+  public int AddPoint(Vector3 point, Vector3 normal, float width) {
 
-    int z1 = vertices.Count;
-
-    for (int i = 0; i < 4; i++) {
-      float rad = 2f * Mathf.PI * i / 4;
-      Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
-      vertices.Add(p1 + (zRotation * v).normalized * w1);
-    }
-
-    int z2 = vertices.Count;
+    int z = vertices.Count;
+    Quaternion zRotation = Quaternion.LookRotation(normal, Vector3.up);
 
     for (int i = 0; i < 4; i++) {
       float rad = 2f * Mathf.PI * i / 4;
       Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
-      vertices.Add(p2 + (zRotation * v).normalized * w2);
+      vertices.Add(point + (zRotation * v).normalized * width);
     }
 
-    triangles.Add(z1 + 0);
-    triangles.Add(z2 + 0);
-    triangles.Add(z1 + 1);
-    triangles.Add(z2 + 0);
-    triangles.Add(z2 + 1);
-    triangles.Add(z1 + 1);
+    return z;
+  }
 
-    triangles.Add(z1 + 1);
-    triangles.Add(z2 + 1);
-    triangles.Add(z1 + 2);
-    triangles.Add(z2 + 1);
-    triangles.Add(z2 + 2);
-    triangles.Add(z1 + 2);
+  public void AddSegment(int p1, int p2) {
 
-    triangles.Add(z1 + 2);
-    triangles.Add(z2 + 2);
-    triangles.Add(z1 + 3);
-    triangles.Add(z2 + 2);
-    triangles.Add(z2 + 3);
-    triangles.Add(z1 + 3);
+    int offset = 0;
+    float dist = (vertices[p1] - vertices[p2 + 0]).magnitude;
 
-    triangles.Add(z1 + 3);
-    triangles.Add(z2 + 3);
-    triangles.Add(z1 + 0);
-    triangles.Add(z2 + 3);
-    triangles.Add(z2 + 0);
-    triangles.Add(z1 + 0);
+    for (int i = 0; i < 4; i++) {
+      float newDist = (vertices[p1] - vertices[p2 + i]).magnitude;
+
+      if (newDist < dist) {
+        offset = i;
+      }
+    }
+
+    triangles.Add(p1 + 0);
+    triangles.Add(p2 + (0 + offset) % 4);
+    triangles.Add(p1 + 1);
+    triangles.Add(p2 + (0 + offset) % 4);
+    triangles.Add(p2 + (1 + offset) % 4);
+    triangles.Add(p1 + 1);
+
+    triangles.Add(p1 + 1);
+    triangles.Add(p2 + (1 + offset) % 4);
+    triangles.Add(p1 + 2);
+    triangles.Add(p2 + (1 + offset) % 4);
+    triangles.Add(p2 + (2 + offset) % 4);
+    triangles.Add(p1 + 2);
+
+    triangles.Add(p1 + 2);
+    triangles.Add(p2 + (2 + offset) % 4);
+    triangles.Add(p1 + 3);
+    triangles.Add(p2 + (2 + offset) % 4);
+    triangles.Add(p2 + (3 + offset) % 4);
+    triangles.Add(p1 + 3);
+
+    triangles.Add(p1 + 3);
+    triangles.Add(p2 + (3 + offset) % 4);
+    triangles.Add(p1 + 0);
+    triangles.Add(p2 + (3 + offset) % 4);
+    triangles.Add(p2 + (0 + offset) % 4);
+    triangles.Add(p1 + 0);
   }
 
   public void UpdateMesh() {
