@@ -11,13 +11,14 @@ public class SpringSystem : ParticleSystemCustom {
   private GameObject[] particlesObjs;
   public GameObject particleObj;
 
-  public const float Gravity = 10.0f;
+  [Header("Spring Settings")]
+  public float Gravity = 10.0f;
 
-  public const float ParticleMass = 1.0f;
-  public const float ParticleDrag = 0.1f;
+  public float ParticleMass = 1.0f;
+  public float ParticleDrag = 0.1f;
 
-  public const float SpringConstant = 10.0f;
-  public const float SpringDistance = 2.5f;
+  public float SpringConstant = 10.0f;
+  public float SpringDistance = 2.5f;
 
   public override void CreateState() {
 
@@ -105,8 +106,12 @@ public class SpringSystem : ParticleSystemCustom {
   }
 
   public override void RenderState() {
-    for (int i = 0; i < numParticles; ++i)
+    for (int i = 0; i < numParticles; ++i) {
       particlesObjs[i].transform.position = state[i];
+
+      if (state[numParticles + i].magnitude > 0.0001f && i > 0)
+        particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i - 1] - state[i], Vector3.up);
+    }
   }
 
   public override void ResetParticles() {} // Never resets particles
