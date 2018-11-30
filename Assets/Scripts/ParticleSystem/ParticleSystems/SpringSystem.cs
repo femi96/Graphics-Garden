@@ -96,6 +96,7 @@ public class SpringSystem : ParticleSystemCustom {
     }
 
     foreach (int i in fixedParticles) {
+      state[i] = transform.position;
       newState[i] = new Vector3();
       newState[i + numParticles] = new Vector3();
     }
