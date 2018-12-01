@@ -10,10 +10,15 @@ public class FallingParticleSystem : ParticleSystemCustom {
   private GameObject[] particlesObjs;
   public GameObject[] prefabs;
 
-  [Header("Spring Settings")]
+  [Header("Boundary Settings")]
+  public float boundaryFloor = 0f;
+  public float boundaryDrag = 0.5f;
+
+
+  [Header("Force Settings")]
   public float Gravity = 10.0f;
   public float ParticleMass = 1.0f;
-  public float ParticleDrag = 0.1f;
+  public float ParticleDrag = 0.8f;
 
   [Header("Particle Spawn Settings")]
   public float spawnRange = 1f;
@@ -76,6 +81,14 @@ public class FallingParticleSystem : ParticleSystemCustom {
     for (int i = 0; i < numParticles; ++i) {
       newState[i] = evalState[numParticles + i];
       newState[i + numParticles] = force[i] / ParticleMass;
+    }
+
+    for (int i = 0; i < numParticles; ++i) {
+      if (state[i].y <= boundaryFloor) {
+        state[i] += new Vector3(0, boundaryFloor - state[i].y, 0);
+        newState[i] += new Vector3(0, -newState[i].y, 0);
+        newState[i + numParticles] = -newState[i] * boundaryDrag;
+      }
     }
 
     return newState;
