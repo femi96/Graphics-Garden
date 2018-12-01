@@ -75,18 +75,21 @@ public class FallingParticleSystem : ParticleSystemCustom {
     // Apply particle forces
     for (int i = 0; i < numParticles; ++i) {
       Vector3 vel = evalState[numParticles + i];
+
+      // Apply wind field to velocity
+      if (windField != null) {
+        Vector3 wind = windField.GetWind(state[i]);
+        vel = vel - wind;
+      }
+
       Vector3 velNormal = Vector3.Project(vel, state[i + numParticles * 2]);
+
       force[i] = Vector3.zero;
       force[i] += new Vector3(0, -gravity * particleMass, 0);
       force[i] += -particleDrag * (vel - velNormal);
       force[i] += -particleNormalDrag * velNormal;
 
       moment[i] = particleMoment * -(vel - velNormal).normalized;
-
-      // Apply wind field
-      if (windField != null) {
-        force[i] += windField.GetWind();
-      }
     }
 
     // Create newState
@@ -104,6 +107,8 @@ public class FallingParticleSystem : ParticleSystemCustom {
         state[i] += new Vector3(0, boundaryFloor - state[i].y, 0);
         newState[i] += new Vector3(0, -newState[i].y, 0);
         newState[i + numParticles] = -newState[i] * boundaryDrag;
+        newState[i + numParticles * 2] = Vector3.zero;
+        newState[i + numParticles * 3] = Vector3.zero;
       }
 
       state[i + numParticles * 2] += state[i + numParticles * 2].normalized;
