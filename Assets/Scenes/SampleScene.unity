@@ -828,9 +828,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ca83d419f289f4c9d5f36f0299c56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern: 3
-  windDirection: {x: 0, y: 1, z: 0}
-  windMagnitude: 0.2
+  windLayers:
+  - pattern: 2
+    windDirection: {x: 0, y: 1, z: 0}
+    windMagnitude: 1
+  - pattern: 1
+    windDirection: {x: 1, y: 0, z: 0}
+    windMagnitude: 0.1
 --- !u!1 &1440251818
 GameObject:
   m_ObjectHideFlags: 0

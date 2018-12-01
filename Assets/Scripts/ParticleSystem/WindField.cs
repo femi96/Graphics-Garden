@@ -4,32 +4,51 @@ using UnityEngine;
 
 public enum WindPattern { None, Uniform, Rotation, UniformRotation };
 
+[System.Serializable]
+public struct WindLayer {
+  public WindPattern pattern;
+  public Vector3 windDirection;
+  public float windMagnitude;
+}
+
 public class WindField : MonoBehaviour {
   /*
   Class that keeps a wind field to apply a force to particles
   */
 
-  public WindPattern pattern;
-  public Vector3 windDirection;
-  public float windMagnitude;
+  public WindLayer[] windLayers;
 
   void Update() {
 
   }
 
   public Vector3 GetWind(Vector3 pos) {
-    switch (pattern) {
-    case WindPattern.Uniform:
-      return windDirection.normalized * windMagnitude;
+    Vector3 wind = Vector3.zero;
 
-    case WindPattern.Rotation:
-      return Vector3.Cross(pos, windDirection) * windMagnitude;
+    foreach (WindLayer w in windLayers) {
+      switch (w.pattern) {
+      case WindPattern.None:
+        wind += Vector3.zero;
+        break;
 
-    case WindPattern.UniformRotation:
-      return Vector3.Cross(pos, windDirection).normalized * windMagnitude;
+      case WindPattern.Uniform:
+        wind += w.windDirection.normalized * w.windMagnitude;
+        break;
 
-    default:
-      return Vector3.zero;
+      case WindPattern.Rotation:
+        wind += Vector3.Cross(pos, w.windDirection) * w.windMagnitude;
+        break;
+
+      case WindPattern.UniformRotation:
+        wind += Vector3.Cross(pos, w.windDirection).normalized * w.windMagnitude;
+        break;
+
+      default:
+        wind += Vector3.zero;
+        break;
+      }
     }
+
+    return wind;
   }
 }
