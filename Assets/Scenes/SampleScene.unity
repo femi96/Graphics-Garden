@@ -998,12 +998,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windLayers:
-  - pattern: 2
+  - pattern: 3
     windDirection: {x: 0, y: 1, z: 0}
     windMagnitude: 1
-  - pattern: 1
-    windDirection: {x: 1, y: 0, z: 0}
-    windMagnitude: 0.1
+    windCenter: {x: 1, y: 0, z: 0}
+    windMax: 0
+  - pattern: 3
+    windDirection: {x: 0, y: 1, z: 0}
+    windMagnitude: 1
+    windCenter: {x: -1, y: 0, z: 0}
+    windMax: 0
 --- !u!4 &1870738958
 Transform:
   m_ObjectHideFlags: 0

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WindPattern { None, Uniform, Rotation, UniformRotation };
+public enum WindPattern { None, Uniform, Rotation, UniformRotation, SinusoidTime };
 
 [System.Serializable]
 public struct WindLayer {
   public WindPattern pattern;
   public Vector3 windDirection;
   public float windMagnitude;
+  public Vector3 windCenter;
+  public float windMax;
 }
 
 public class WindField : MonoBehaviour {
@@ -18,8 +20,10 @@ public class WindField : MonoBehaviour {
 
   public WindLayer[] windLayers;
 
-  void Update() {
+  private float time = 0f;
 
+  void Update() {
+    time += Time.deltaTime;
   }
 
   public Vector3 GetWind(Vector3 pos) {
@@ -36,11 +40,16 @@ public class WindField : MonoBehaviour {
         break;
 
       case WindPattern.Rotation:
-        wind += Vector3.Cross(pos, w.windDirection) * w.windMagnitude;
+        Vector3 windTemp = Vector3.Cross(pos - w.windCenter, w.windDirection) * w.windMagnitude;
+        wind += windTemp * Mathf.Min(1,  w.windMax / windTemp.magnitude);
+        break;
+
+      case WindPattern.SinusoidTime:
+        wind += w.windDirection.normalized * Mathf.Sin(time * w.windDirection.magnitude) * w.windMagnitude;
         break;
 
       case WindPattern.UniformRotation:
-        wind += Vector3.Cross(pos, w.windDirection).normalized * w.windMagnitude;
+        wind += Vector3.Cross(pos - w.windCenter, w.windDirection).normalized * w.windMagnitude;
         break;
 
       default:
