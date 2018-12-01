@@ -14,7 +14,7 @@ public abstract class ParticleSystemCustom : MonoBehaviour {
   void Update() {
 
     if (reset) {
-      windField = GetComponent<WindField>();
+      windField = Object.FindObjectOfType<WindField>();
       CreateState();
       reset = false;
     }
