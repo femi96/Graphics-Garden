@@ -82,6 +82,11 @@ public class FallingParticleSystem : ParticleSystemCustom {
       force[i] += -particleNormalDrag * velNormal;
 
       moment[i] = particleMoment * -(vel - velNormal).normalized;
+
+      // Apply wind field
+      if (windField != null) {
+        force[i] += windField.GetWind();
+      }
     }
 
     // Create newState

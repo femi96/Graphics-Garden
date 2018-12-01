@@ -7,12 +7,14 @@ public abstract class ParticleSystemCustom : MonoBehaviour {
   Particle system abstract class using first order derivatives
   */
 
+  public WindField windField;
   public Vector3[] state;
   public bool reset = true;
 
   void Update() {
 
     if (reset) {
+      windField = GetComponent<WindField>();
       CreateState();
       reset = false;
     }
