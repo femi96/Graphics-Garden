@@ -14,11 +14,12 @@ public class FallingParticleSystem : ParticleSystemCustom {
   public float boundaryFloor = 0f;
   public float boundaryDrag = 0.5f;
 
-
   [Header("Force Settings")]
-  public float Gravity = 10.0f;
-  public float ParticleMass = 1.0f;
-  public float ParticleDrag = 0.8f;
+  public float gravity = 10.0f;
+  public float particleMass = 1.0f;
+  public float particleDrag = 0.2f;
+  public float particleNormalDrag = 0.8f;
+  public float particleMoment = 0.1f;
 
   [Header("Particle Spawn Settings")]
   public float spawnRange = 1f;
@@ -39,8 +40,8 @@ public class FallingParticleSystem : ParticleSystemCustom {
       activeParticles[i] = false;
 
 
-    // State is (x, v)
-    state = new Vector3[numParticles * 2];
+    // State is (x, v, normal, v_ang)
+    state = new Vector3[numParticles * 4];
     particlesObjs = new GameObject[numParticles];
 
     for (int i = 0; i < numParticles; ++i)
@@ -49,9 +50,11 @@ public class FallingParticleSystem : ParticleSystemCustom {
 
   private void ResetParticle(int i) {
 
-    // State is (x, v)
+    // State is (x, v, normal, v_ang)
     state[i] = transform.position + Random.onUnitSphere * Random.Range(-spawnRange, spawnRange); // x
     state[i + numParticles] = new Vector3(); // v
+    state[i + numParticles * 2] = (Random.onUnitSphere + Vector3.up * 0f).normalized; // normal
+    state[i + numParticles * 3] = new Vector3(); // v_ang
 
     GameObject.Destroy(particlesObjs[i]);
 
@@ -67,20 +70,28 @@ public class FallingParticleSystem : ParticleSystemCustom {
 
     // F = -mg -dv -kx
     Vector3[] force = new Vector3[numParticles];
+    Vector3[] moment = new Vector3[numParticles];
 
     // Apply particle forces
     for (int i = 0; i < numParticles; ++i) {
-      force[i] = new Vector3();
-      force[i] += new Vector3(0, -Gravity * ParticleMass, 0);
-      force[i] += -ParticleDrag * evalState[numParticles + i];
+      Vector3 vel = evalState[numParticles + i];
+      Vector3 velNormal = Vector3.Project(vel, state[i + numParticles * 2]);
+      force[i] = Vector3.zero;
+      force[i] += new Vector3(0, -gravity * particleMass, 0);
+      force[i] += -particleDrag * (vel - velNormal);
+      force[i] += -particleNormalDrag * velNormal;
+
+      moment[i] = particleMoment * -(vel - velNormal).normalized;
     }
 
     // Create newState
-    Vector3[] newState = new Vector3[numParticles * 2];
+    Vector3[] newState = new Vector3[numParticles * 4];
 
     for (int i = 0; i < numParticles; ++i) {
       newState[i] = evalState[numParticles + i];
-      newState[i + numParticles] = force[i] / ParticleMass;
+      newState[i + numParticles] = force[i] / particleMass;
+      newState[i + numParticles * 2] = state[i + numParticles * 3];
+      newState[i + numParticles * 3] = moment[i] / particleMass;
     }
 
     for (int i = 0; i < numParticles; ++i) {
@@ -89,6 +100,8 @@ public class FallingParticleSystem : ParticleSystemCustom {
         newState[i] += new Vector3(0, -newState[i].y, 0);
         newState[i + numParticles] = -newState[i] * boundaryDrag;
       }
+
+      state[i + numParticles * 2] += state[i + numParticles * 2].normalized;
     }
 
     return newState;
@@ -97,9 +110,7 @@ public class FallingParticleSystem : ParticleSystemCustom {
   public override void RenderState() {
     for (int i = 0; i < numParticles; ++i) {
       particlesObjs[i].transform.position = state[i];
-
-      if (state[numParticles + i].magnitude > 0.0001f && i > 0)
-        particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i - 1] - state[i], Vector3.up);
+      particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i + numParticles * 2], Vector3.up);
     }
   }
 

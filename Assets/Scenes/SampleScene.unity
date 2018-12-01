@@ -746,14 +746,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
-  numParticles: 20
+  numParticles: 1000
   prefabs:
   - {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32, type: 2}
-  Gravity: 10
-  ParticleMass: 0.1
-  ParticleDrag: 1
+  boundaryFloor: 0
+  boundaryDrag: 2
+  gravity: 10
+  particleMass: 0.1
+  particleDrag: 0.2
+  particleNormalDrag: 1.2
+  particleMoment: 2000
   spawnRange: 1
-  spawnRate: 1
+  spawnRate: 0.01
 --- !u!4 &1421953480
 Transform:
   m_ObjectHideFlags: 0
@@ -761,7 +765,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1421953478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
