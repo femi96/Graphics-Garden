@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpringSystem : ParticleSystemCustom {
+public class PetalSystem : ParticleSystemCustom {
 
-  public int numParticles = 4;
-  private int[] fixedParticles = new int[] {0};
+  public int numParticles = 9;
+  private List<int> fixedParticles;
+  private List<Vector3> fixedRelative;
+
   private List<int> springPairs;
+  private List<float> springDistances;
 
   private GameObject[] particlesObjs;
   public GameObject particleObj;
@@ -14,11 +17,11 @@ public class SpringSystem : ParticleSystemCustom {
   [Header("Spring Settings")]
   public float Gravity = 10.0f;
 
-  public float ParticleMass = 1.0f;
+  public float ParticleMass = 0.1f;
   public float ParticleDrag = 0.1f;
 
   public float SpringConstant = 10.0f;
-  public float SpringDistance = 2.5f;
+  public float SpringDistance = 1.0f;
 
   public override void CreateState() {
 
@@ -28,9 +31,11 @@ public class SpringSystem : ParticleSystemCustom {
 
     // State is (x, v)
     state = new Vector3[numParticles * 2];
-    particlesObjs = new GameObject[numParticles];
+    particlesObjs = new GameObject[numParticles / 3];
+    fixedParticles = new List<int>();
+    fixedRelative = new List<Vector3>();
 
-    for (int i = 0; i < numParticles; ++i)
+    for (int i = 0; i < numParticles / 3; ++i)
       ResetParticle(i);
 
     SetupSprings();
@@ -39,21 +44,38 @@ public class SpringSystem : ParticleSystemCustom {
   public void ResetParticle(int i) {
 
     // State is (x, v)
-    state[i] = transform.position + new Vector3(i, -i, 0); // x
-    state[i + numParticles] = Vector3.zero; // v
+    int j = 3 * i;
+    Vector3 dir = Random.onUnitSphere;
+    state[j] = transform.position + dir * SpringDistance * 1; // x
+    state[j + numParticles] = Vector3.zero; // v
+    fixedParticles.Add(j);
+    fixedRelative.Add(dir * SpringDistance * 1);
+
+    state[j + 1] = transform.position + dir * SpringDistance * 2; // x
+    state[j + numParticles + 1] = Vector3.zero; // v
+    fixedParticles.Add(j + 1);
+    fixedRelative.Add(dir * SpringDistance * 2);
+
+    state[j + 2] = transform.position + dir * SpringDistance * 3; // x
+    state[j + numParticles + 2] = Vector3.zero; // v
 
     GameObject.Destroy(particlesObjs[i]);
 
-    particlesObjs[i] = Instantiate(particleObj, state[i], Quaternion.identity, transform);
+    particlesObjs[i] = Instantiate(particleObj, state[j + 2], Quaternion.identity, transform);
   }
 
   public void SetupSprings() {
     // Add springs
     springPairs = new List<int>();
+    springDistances = new List<float>();
 
-    for (int i = 0; i < numParticles - 1; ++i) {
-      springPairs.Add(i);
-      springPairs.Add(i + 1);
+    for (int i = 0; i < numParticles / 3; ++i) {
+      springPairs.Add(i * 3);
+      springPairs.Add(i * 3 + 2);
+      springDistances.Add(SpringDistance * 2);
+      springPairs.Add(i * 3 + 1);
+      springPairs.Add(i * 3 + 2);
+      springDistances.Add(SpringDistance);
     }
   }
 
@@ -86,7 +108,7 @@ public class SpringSystem : ParticleSystemCustom {
       Vector3 p2top1 = particle1 - particle2;
 
       float dist = p1top2.magnitude;
-      float deltaForce = -SpringConstant * (dist - SpringDistance);
+      float deltaForce = -SpringConstant * (dist - springDistances[i / 2]);
 
       force[particleIndex1] += deltaForce * p2top1 / dist;
       force[particleIndex2] += deltaForce * p1top2 / dist;
@@ -101,8 +123,9 @@ public class SpringSystem : ParticleSystemCustom {
       newState[i + numParticles] = force[i] / ParticleMass;
     }
 
-    foreach (int i in fixedParticles) {
-      state[i] = transform.position;
+    for (int j = 0; j < fixedParticles.Count; ++j) {
+      int i = fixedParticles[j];
+      state[i] = transform.position + fixedRelative[j];
       newState[i] = new Vector3();
       newState[i + numParticles] = new Vector3();
     }
@@ -111,11 +134,9 @@ public class SpringSystem : ParticleSystemCustom {
   }
 
   public override void RenderState() {
-    for (int i = 0; i < numParticles; ++i) {
-      particlesObjs[i].transform.position = state[i];
-
-      if (state[numParticles + i].magnitude > 0.0001f && i > 0)
-        particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i - 1] - state[i], Vector3.up);
+    for (int i = 0; i < numParticles / 3; ++i) {
+      particlesObjs[i].transform.position = state[i * 3 + 2];
+      particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i * 3 + 2] - transform.position, Vector3.up);
     }
   }
 
