@@ -39,8 +39,12 @@ public class PetalSystem : ParticleSystemCustom {
     fixedParticles = new List<int>();
     fixedRelative = new List<Vector3>();
 
-    for (int i = 0; i < numParticles / 3; ++i)
-      ResetParticle(i);
+    if (faceAlign) {
+      ResetParticlesFace();
+    } else {
+      for (int i = 0; i < numParticles / 3; ++i)
+        ResetParticle(i);
+    }
 
     SetupSprings();
   }
@@ -50,13 +54,6 @@ public class PetalSystem : ParticleSystemCustom {
     // State is (x, v)
     int j = 3 * i;
     Vector3 dir = Random.onUnitSphere;
-
-    if (faceAlign) {
-      float rad = 2f * Mathf.PI * Random.Range(0.0f, 1.0f);
-      Quaternion zRotation = Quaternion.LookRotation(faceNormal, Vector3.up);
-      Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
-      dir = (zRotation * v).normalized;
-    }
 
     state[j] = transform.position + dir * SpringDistance * 1; // x
     state[j + numParticles] = Vector3.zero; // v
@@ -75,6 +72,35 @@ public class PetalSystem : ParticleSystemCustom {
 
     particlesObjs[i] = Instantiate(particleObj, state[j + 2], Quaternion.identity, transform);
   }
+
+  public void ResetParticlesFace() {
+
+    for (int i = 0; i < numParticles / 3; ++i) {
+      float rad = 2f * Mathf.PI * i / (numParticles / 3);
+      Quaternion zRotation = Quaternion.LookRotation(faceNormal, Vector3.up);
+      Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
+      Vector3 dir = (zRotation * v).normalized;
+      int j = 3 * i;
+
+      state[j] = transform.position + dir * SpringDistance * 1; // x
+      state[j + numParticles] = Vector3.zero; // v
+      fixedParticles.Add(j);
+      fixedRelative.Add(dir * SpringDistance * 1);
+
+      state[j + 1] = transform.position + dir * SpringDistance * 2; // x
+      state[j + numParticles + 1] = Vector3.zero; // v
+      fixedParticles.Add(j + 1);
+      fixedRelative.Add(dir * SpringDistance * 2);
+
+      state[j + 2] = transform.position + dir * SpringDistance * 3; // x
+      state[j + numParticles + 2] = Vector3.zero; // v
+
+      GameObject.Destroy(particlesObjs[i]);
+
+      particlesObjs[i] = Instantiate(particleObj, state[j + 2], Quaternion.identity, transform);
+    }
+  }
+
 
   public void SetupSprings() {
     // Add springs

@@ -941,10 +941,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
-  numParticles: 300
+  numParticles: 30
   particleObj: {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32,
     type: 2}
-  faceAlign: 0
+  faceAlign: 1
   faceNormal: {x: 1, y: 0, z: 0}
   Gravity: 0.1
   ParticleMass: 0.1
