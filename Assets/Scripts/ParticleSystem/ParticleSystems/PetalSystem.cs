@@ -14,6 +14,10 @@ public class PetalSystem : ParticleSystemCustom {
   private GameObject[] particlesObjs;
   public GameObject particleObj;
 
+  [Header("Shape Settings")]
+  public bool faceAlign = false;
+  public Vector3 faceNormal = new Vector3(1, 0, 0);
+
   [Header("Spring Settings")]
   public float Gravity = 10.0f;
 
@@ -46,6 +50,14 @@ public class PetalSystem : ParticleSystemCustom {
     // State is (x, v)
     int j = 3 * i;
     Vector3 dir = Random.onUnitSphere;
+
+    if (faceAlign) {
+      float rad = 2f * Mathf.PI * Random.Range(0.0f, 1.0f);
+      Quaternion zRotation = Quaternion.LookRotation(faceNormal, Vector3.up);
+      Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
+      dir = (zRotation * v).normalized;
+    }
+
     state[j] = transform.position + dir * SpringDistance * 1; // x
     state[j + numParticles] = Vector3.zero; // v
     fixedParticles.Add(j);
