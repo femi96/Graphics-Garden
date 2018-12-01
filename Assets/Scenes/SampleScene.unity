@@ -423,9 +423,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1c82ef856aa35429104f47118cd3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windField: {fileID: 0}
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numBoids: 10
   boidObj: {fileID: 1430961983013698, guid: 88c7d5a72ad1d6c48928e9585f01fd70, type: 2}
   BoidSpeed: 1.5
@@ -641,9 +642,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c8fd3b99263a849b77d7c01d4fb495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windField: {fileID: 0}
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numParticles: 4
   particleObj: {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32,
     type: 2}
@@ -692,9 +694,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e053f5302715d4eb7f0b94f1441aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windField: {fileID: 0}
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numParticles: 10
   fixedParticles: 00000000
   particleObj: {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32,
@@ -734,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1421953479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,9 +749,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7ee58507dfa1b49a05428251560a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windField: {fileID: 0}
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numParticles: 1000
   prefabs:
   - {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32, type: 2}
@@ -831,7 +835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1440251819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,9 +847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1c82ef856aa35429104f47118cd3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windField: {fileID: 0}
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numBoids: 20
   boidObj: {fileID: 1506931937630334, guid: 50fb003c4b2a06840be9054bd95ab723, type: 2}
   BoidSpeed: 1.5
@@ -890,7 +895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1707096637
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -944,10 +949,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e408c70e3aeaf4c86b10ea32480655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windField: {fileID: 0}
   state: []
   reset: 1
-  numParticles: 30
+  ignoreWind: 0
+  windField: {fileID: 0}
+  numParticles: 60
   particleObj: {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32,
     type: 2}
   faceAlign: 1
@@ -998,15 +1004,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windLayers:
-  - pattern: 3
-    windDirection: {x: 0, y: 1, z: 0}
+  - pattern: 4
+    windDirection: {x: 1, y: 0, z: 0}
     windMagnitude: 1
-    windCenter: {x: 1, y: 0, z: 0}
+    windCenter: {x: 0, y: 0, z: 0}
     windMax: 0
-  - pattern: 3
-    windDirection: {x: 0, y: 1, z: 0}
-    windMagnitude: 1
-    windCenter: {x: -1, y: 0, z: 0}
+  - pattern: 1
+    windDirection: {x: 1, y: 1, z: 0}
+    windMagnitude: 0.5
+    windCenter: {x: 0, y: 0, z: 0}
     windMax: 0
 --- !u!4 &1870738958
 Transform:

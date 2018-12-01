@@ -7,14 +7,21 @@ public abstract class ParticleSystemCustom : MonoBehaviour {
   Particle system abstract class using first order derivatives
   */
 
-  public WindField windField;
   public Vector3[] state;
   public bool reset = true;
+
+  [Header("Wind Settings")]
+  public bool ignoreWind = false;
+  public WindField windField;
 
   void Update() {
 
     if (reset) {
-      windField = Object.FindObjectOfType<WindField>();
+      windField = null;
+
+      if (!ignoreWind)
+        windField = Object.FindObjectOfType<WindField>();
+
       CreateState();
       reset = false;
     }

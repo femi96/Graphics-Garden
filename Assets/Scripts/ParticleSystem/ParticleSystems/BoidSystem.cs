@@ -106,6 +106,12 @@ public class BoidSystem : ParticleSystemCustom {
       accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 2));
 
       // Speed control
+      // Apply wind field to velocity
+      if (windField != null) {
+        Vector3 wind = windField.GetWind(state[i]);
+        boidVel = boidVel - wind;
+      }
+
       accel[i] += BoidSpeedDragConstant * (BoidSpeed - boidVel.magnitude) * boidVel.normalized;
     }
 

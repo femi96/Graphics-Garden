@@ -130,7 +130,16 @@ public class PetalSystem : ParticleSystemCustom {
     for (int i = 0; i < numParticles; ++i) {
       force[i] = new Vector3();
       force[i] += new Vector3(0, -Gravity * ParticleMass, 0);
-      force[i] += -ParticleDrag * evalState[numParticles + i];
+
+      Vector3 vel = evalState[numParticles + i];
+
+      // Apply wind field to velocity
+      if (windField != null) {
+        Vector3 wind = windField.GetWind(state[i]);
+        vel = vel - wind;
+      }
+
+      force[i] += -ParticleDrag * vel;
     }
 
     // Apply spring forces
