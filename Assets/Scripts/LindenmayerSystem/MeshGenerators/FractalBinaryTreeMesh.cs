@@ -39,7 +39,7 @@ public class FractalBinaryTreeMesh : MeshGenerator {
 
     currentPos = new Vector3();
     currentRot = Quaternion.identity;
-    currentPoint = AddPoint(currentPos, upScld, meshScaleW);
+    currentPoint = AddPoint(currentPos, currentRot * upScld, meshScaleW);
     currentWidth = maxWidth;
 
     positionStack = new List<Vector3>() { currentPos };
@@ -65,7 +65,7 @@ public class FractalBinaryTreeMesh : MeshGenerator {
         currentPos += upRel;
         currentPoint = p1;
 
-        p2 = AddPoint(currentPos + upRel * 1f, upRel, 0.001f);
+        p2 = AddPoint(currentPos + upRel * 0.1f, upRel, 0.001f);
         AddSegment(p1, p2);
         break;
 
@@ -87,7 +87,7 @@ public class FractalBinaryTreeMesh : MeshGenerator {
         rotationStack.Add(currentRot);
         pointStack.Add(currentPoint);
         widthStack.Add(currentWidth);
-        currentRot *= Quaternion.AngleAxis(45, Vector3.right);
+        currentRot *= Quaternion.AngleAxis(45, Vector3.forward);
         break;
 
       case ']':
@@ -100,7 +100,7 @@ public class FractalBinaryTreeMesh : MeshGenerator {
         rotationStack.RemoveAt(stackEnd);
         pointStack.RemoveAt(stackEnd);
         widthStack.RemoveAt(stackEnd);
-        currentRot *= Quaternion.AngleAxis(-45, Vector3.right);
+        currentRot *= Quaternion.AngleAxis(-45, Vector3.forward);
         break;
       }
     }

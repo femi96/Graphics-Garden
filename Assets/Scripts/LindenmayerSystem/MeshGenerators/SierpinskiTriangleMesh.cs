@@ -65,12 +65,12 @@ public class SierpinskiTriangleMesh : MeshGenerator {
 
       case '+':
         // Rotate angleDeg
-        currentRot *= Quaternion.AngleAxis(angleDeg, Vector3.right);
+        currentRot *= Quaternion.AngleAxis(angleDeg, Vector3.forward);
         break;
 
       case '-':
         // Rotate -angleDeg
-        currentRot *= Quaternion.AngleAxis(-angleDeg, Vector3.right);
+        currentRot *= Quaternion.AngleAxis(-angleDeg, Vector3.forward);
         break;
       }
     }
