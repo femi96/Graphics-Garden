@@ -31,6 +31,12 @@ public class LConditionalStep : ProductionRule {
     stepBound = step;
   }
 
+  public LConditionalStep(ProductionRule outputT, ProductionRule outputF, int step) {
+    ruleT = outputT;
+    ruleF = outputF;
+    stepBound = step;
+  }
+
   public string Output(string state, int i, int step) {
     if (step < stepBound) {
       if (ruleT != null)
