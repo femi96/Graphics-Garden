@@ -20,6 +20,7 @@ public class BoidSystem : ParticleSystemCustom {
 
   [Header("Boundary Settings")]
   public float BoundaryDistance = 4f;
+  public bool BoundaryFloor = true;
 
   [Header("Factor Weight Settings")]
   public float WeightSeparation = 1.0f;
@@ -32,6 +33,8 @@ public class BoidSystem : ParticleSystemCustom {
   public float SpawnRange = 5;
 
   public override void CreateState() {
+
+    spawnTime = Random.Range(0f, 1f) * spawnRate;
 
     // Clear child objects
     foreach (Transform child in transform)
@@ -102,8 +105,10 @@ public class BoidSystem : ParticleSystemCustom {
       // Noise
       accel[i] += Random.onUnitSphere * Random.Range(0, WeightNoise);
       // Limit
-      accel[i] += WeightAvoidance * -boidPos.normalized * Mathf.Max(0, boidPos.magnitude - BoundaryDistance);
-      accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 2));
+      accel[i] += WeightAvoidance * -(boidPos - transform.position).normalized * Mathf.Max(0, (boidPos - transform.position).magnitude - BoundaryDistance);
+
+      if (BoundaryFloor)
+        accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 0.2f));
 
       // Speed control
       // Apply wind field to velocity
@@ -158,7 +163,7 @@ public class BoidSystem : ParticleSystemCustom {
   private void ResetParticle(int i) {
 
     // State is (x, v)
-    state[i] = Random.onUnitSphere * Random.Range(-SpawnRange, SpawnRange); // x
+    state[i] = transform.position + Random.onUnitSphere * Random.Range(-SpawnRange, SpawnRange); // x
     state[i + numBoids] = (Random.onUnitSphere + Vector3.up).normalized; // v
 
     GameObject.Destroy(boidObjects[i]);

@@ -390,7 +390,7 @@ MonoBehaviour:
   reset: 1
   ignoreWind: 0
   windField: {fileID: 0}
-  numParticles: 10
+  numParticles: 20
   prefabs:
   - {fileID: 1137945292829696, guid: 0e2fb7f00418ba449bd31bc4ebfdb157, type: 2}
   boundaryFloor: 0

@@ -16,12 +16,13 @@ public class TreeL : MeshGenerator {
     lSystem.AddRule('L', new LTerminal());
     lSystem.AddRule('1', new LVariable("FFF2"));
     lSystem.AddRule('2', new LConditionalStep("F[-2]+2", "3", branchStep));
-    lSystem.AddRule('3', new LConditionalStep(new LProbabilistic("F*3", "F[-3]+3", 0.75f), new LProbabilistic("L", "Z", 0.75f), steps));
+    lSystem.AddRule('3', new LConditionalStep(new LProbabilistic("F*3", "F[-3]+3", 0.75f), new LProbabilistic("L", "Z", leafRate), steps));
   }
 
   public float meshScaleL = 0.1f;
   public float meshScaleW = 0.1f;
   public int angleDeg = 25;
+  public float leafRate = 0.75f;
   public GameObject leaf;
   public GameObject falling;
   public int branchStep = 7;

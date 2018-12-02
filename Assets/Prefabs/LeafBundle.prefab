@@ -390,7 +390,7 @@ MonoBehaviour:
   reset: 1
   ignoreWind: 0
   windField: {fileID: 0}
-  numParticles: 10
+  numParticles: 20
   prefabs:
   - {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32, type: 2}
   boundaryFloor: 0
@@ -401,4 +401,4 @@ MonoBehaviour:
   particleNormalDrag: 1.2
   particleMoment: 2000
   spawnRange: 0.1
-  spawnRate: 10
+  spawnRate: 3

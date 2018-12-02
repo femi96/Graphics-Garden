@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1521416265245308}
+  m_RootGameObject: {fileID: 1064237154474164}
   m_IsPrefabParent: 1
---- !u!1 &1521416265245308
+--- !u!1 &1064237154474164
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4103856491582608}
-  - component: {fileID: 33891023223757220}
-  - component: {fileID: 23900110296716942}
-  - component: {fileID: 114614077626885406}
+  - component: {fileID: 4975371247676964}
+  - component: {fileID: 33566238748313052}
+  - component: {fileID: 23812499844407726}
+  - component: {fileID: 114106733996172438}
   m_Layer: 0
-  m_Name: TreeL
+  m_Name: TreeLTall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4103856491582608
+--- !u!4 &4975371247676964
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1521416265245308}
+  m_GameObject: {fileID: 1064237154474164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0}
+  m_LocalPosition: {x: -2.5, y: 0, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23900110296716942
+--- !u!23 &23812499844407726
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1521416265245308}
+  m_GameObject: {fileID: 1064237154474164}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -77,19 +77,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33891023223757220
+--- !u!33 &33566238748313052
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1521416265245308}
+  m_GameObject: {fileID: 1064237154474164}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114614077626885406
+--- !u!114 &114106733996172438
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1521416265245308}
+  m_GameObject: {fileID: 1064237154474164}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f764b7d2aeb7ac549bc41f4a1b3730a5, type: 3}
@@ -98,10 +98,9 @@ MonoBehaviour:
   steps: 10
   reset: 1
   segmentSides: 4
-  meshScaleL: 0.3
-  meshScaleW: 0.2
-  angleDeg: 45
-  leafRate: 0.75
+  meshScaleL: 0.5
+  meshScaleW: 0.25
+  angleDeg: 25
   leaf: {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32, type: 2}
   falling: {fileID: 1025827657806558, guid: 7551164c120b8d94f9b6c2200d34c71f, type: 2}
-  branchStep: 7
+  branchStep: 8
