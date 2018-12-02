@@ -1063,6 +1063,7 @@ MonoBehaviour:
   Gravity: 0.1
   ParticleMass: 0.1
   ParticleDrag: 1
+  ParticleWindDrag: 0.1
   SpringConstant: 10
   SpringDistance: 0.3
 --- !u!4 &1707096640
@@ -1109,11 +1110,6 @@ MonoBehaviour:
   - pattern: 4
     windDirection: {x: 1, y: 0, z: 0}
     windMagnitude: 1
-    windCenter: {x: 0, y: 0, z: 0}
-    windMax: 0
-  - pattern: 1
-    windDirection: {x: 1, y: 1, z: 0}
-    windMagnitude: 0.5
     windCenter: {x: 0, y: 0, z: 0}
     windMax: 0
 --- !u!4 &1870738958

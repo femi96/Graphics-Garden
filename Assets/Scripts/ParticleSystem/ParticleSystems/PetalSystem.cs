@@ -23,6 +23,7 @@ public class PetalSystem : ParticleSystemCustom {
 
   public float ParticleMass = 0.1f;
   public float ParticleDrag = 0.1f;
+  public float ParticleWindDrag = 0.1f;
 
   public float SpringConstant = 10.0f;
   public float SpringDistance = 1.0f;
@@ -76,7 +77,7 @@ public class PetalSystem : ParticleSystemCustom {
   public void ResetParticlesFace() {
 
     for (int i = 0; i < numParticles / 3; ++i) {
-      float rad = 2f * Mathf.PI * i / (numParticles / 3);
+      float rad = 2f * Mathf.PI * i / (numParticles / 3) + 0.1f;
       Quaternion zRotation = Quaternion.LookRotation(faceNormal, Vector3.up);
       Vector3 v = new Vector3(Mathf.Sin(rad), Mathf.Cos(rad), 0f);
       Vector3 dir = (zRotation * v).normalized;
@@ -136,7 +137,7 @@ public class PetalSystem : ParticleSystemCustom {
       // Apply wind field to velocity
       if (windField != null) {
         Vector3 wind = windField.GetWind(state[i]);
-        vel = vel - wind;
+        vel = vel - wind * ParticleWindDrag;
       }
 
       force[i] += -ParticleDrag * vel;
@@ -172,7 +173,7 @@ public class PetalSystem : ParticleSystemCustom {
 
     for (int j = 0; j < fixedParticles.Count; ++j) {
       int i = fixedParticles[j];
-      state[i] = transform.position + fixedRelative[j];
+      state[i] = transform.position + transform.rotation * fixedRelative[j];
       newState[i] = new Vector3();
       newState[i + numParticles] = new Vector3();
     }
@@ -183,7 +184,11 @@ public class PetalSystem : ParticleSystemCustom {
   public override void RenderState() {
     for (int i = 0; i < numParticles / 3; ++i) {
       particlesObjs[i].transform.position = state[i * 3 + 2];
-      particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i * 3 + 2] - transform.position, Vector3.up);
+
+      if (faceAlign)
+        particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i * 3 + 2] - transform.position, transform.rotation * faceNormal);
+      else
+        particlesObjs[i].transform.rotation = Quaternion.LookRotation(state[i * 3 + 2] - transform.position, Vector3.up);
     }
   }
 
