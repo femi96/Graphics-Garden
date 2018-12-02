@@ -13,7 +13,7 @@ public class LVariable : ProductionRule {
     productionOutput = output;
   }
 
-  public string Output(string state, int i) {
+  public string Output(string state, int i, int step) {
     return productionOutput;
   }
 }

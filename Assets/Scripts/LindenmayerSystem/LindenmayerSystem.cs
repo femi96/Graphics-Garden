@@ -45,7 +45,7 @@ public class LindenmayerSystem {
 
     for (int i = 0; i < state.Length; i++) {
       c = state[i];
-      newState += productionRules[c].Output(state, i);
+      newState += productionRules[c].Output(state, i, steps);
     }
 
     state = newState;

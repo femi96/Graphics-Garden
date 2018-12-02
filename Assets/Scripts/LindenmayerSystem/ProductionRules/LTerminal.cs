@@ -9,7 +9,7 @@ public class LTerminal : ProductionRule {
 
   public LTerminal() {}
 
-  public string Output(string state, int i) {
+  public string Output(string state, int i, int step) {
     return state[i].ToString();
   }
 }

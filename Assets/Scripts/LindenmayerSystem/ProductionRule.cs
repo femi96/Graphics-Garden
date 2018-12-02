@@ -13,5 +13,5 @@ public interface ProductionRule {
   Probabilistic Variables - Probabilistic varibles in L-System
   */
 
-  string Output(string state, int i);
+  string Output(string state, int i, int step);
 }

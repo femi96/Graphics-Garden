@@ -12,7 +12,7 @@ public abstract class MeshGenerator : SystemGenerator {
   private List<int> triangles;
 
   [Header("Mesh Generator Settings")]
-  public int segmentSides = 3; // Must be greater than 3
+  public int segmentSides = 4; // Must be greater than 3
 
   public void CreateMesh() {
     mesh = new Mesh();
