@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeA : MeshGenerator {
+public class TreeB : MeshGenerator {
 
   public override void CreateSystem() {
     lSystem = new LindenmayerSystem("1");
     lSystem.AddRule('+', new LTerminal());
     lSystem.AddRule('-', new LTerminal());
+    lSystem.AddRule('*', new LTerminal());
     lSystem.AddRule('[', new LTerminal());
     lSystem.AddRule(']', new LTerminal());
     lSystem.AddRule('F', new LTerminal());
     lSystem.AddRule('L', new LTerminal());
-    lSystem.AddRule('1', new LVariable("FF2"));
-    lSystem.AddRule('2', new LConditionalStep("F[-2]+2", "FL", steps));
+    lSystem.AddRule('1', new LVariable("FFF2"));
+    lSystem.AddRule('2', new LConditionalStep("F[-2]+2", "3", branchStep));
+    lSystem.AddRule('3', new LConditionalStep(new LProbabilistic("F*3", "F[-3]+3", 0.75f), "L", steps));
   }
 
   public float meshScaleL = 0.1f;
   public float meshScaleW = 0.1f;
   public int angleDeg = 25;
   public GameObject leaf;
+  public int branchStep = 7;
 
   private List<float> CalculateWidths(string state) {
 
@@ -118,6 +121,16 @@ public class TreeA : MeshGenerator {
       case '-':
         // Rotate -angleDeg
         currentRot *= Quaternion.AngleAxis(-angleDeg, (Random.onUnitSphere + Vector3.right));
+        break;
+
+      case '*':
+
+        // Rotate +-angleDeg
+        if (Random.Range(0f, 1f) <= 0.5f)
+          currentRot *= Quaternion.AngleAxis(angleDeg, (Random.onUnitSphere + Vector3.right));
+        else
+          currentRot *= Quaternion.AngleAxis(-angleDeg, (Random.onUnitSphere + Vector3.right));
+
         break;
 
       case '[':
