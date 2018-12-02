@@ -165,6 +165,6 @@ MonoBehaviour:
   Gravity: 0.1
   ParticleMass: 0.1
   ParticleDrag: 0.3
-  ParticleWindDrag: 0.02
+  ParticleWindDrag: 0.2
   SpringConstant: 20
   SpringDistance: 0.04
