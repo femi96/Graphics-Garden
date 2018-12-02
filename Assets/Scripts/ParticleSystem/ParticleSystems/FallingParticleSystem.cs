@@ -23,10 +23,12 @@ public class FallingParticleSystem : ParticleSystemCustom {
 
   [Header("Particle Spawn Settings")]
   public float spawnRange = 1f;
-  private float spawnTime = 0f;
   public float spawnRate = 1f;
+  private float spawnTime = 0f;
 
   public override void CreateState() {
+
+    spawnTime = Random.Range(0f, 1f) * spawnRate;
 
     // Clear child objects
     foreach (Transform child in transform)

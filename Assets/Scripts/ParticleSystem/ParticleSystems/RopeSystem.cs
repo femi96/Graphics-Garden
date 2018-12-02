@@ -9,7 +9,7 @@ public class RopeSystem : ParticleSystemCustom {
   private List<int> springPairs;
   private List<float> springDistances;
 
-  private GameObject[] particlesObjs;
+  public GameObject[] particlesObjs;
   public GameObject particleObj;
 
   [Header("Spring Settings")]
