@@ -108,7 +108,7 @@ public class BoidSystem : ParticleSystemCustom {
       accel[i] += WeightAvoidance * -(boidPos - transform.position).normalized * Mathf.Max(0, (boidPos - transform.position).magnitude - BoundaryDistance);
 
       if (BoundaryFloor)
-        accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 0.2f));
+        accel[i] += WeightAvoidance * Vector3.up * Mathf.Max(0, -(boidPos.y - 1.5f));
 
       // Speed control
       // Apply wind field to velocity
@@ -165,6 +165,9 @@ public class BoidSystem : ParticleSystemCustom {
     // State is (x, v)
     state[i] = transform.position + Random.onUnitSphere * Random.Range(-SpawnRange, SpawnRange); // x
     state[i + numBoids] = (Random.onUnitSphere + Vector3.up).normalized; // v
+
+    if (BoundaryFloor)
+      state[i] = new Vector3(state[i].x, Mathf.Abs(state[i].y), state[i].z);
 
     GameObject.Destroy(boidObjects[i]);
 
