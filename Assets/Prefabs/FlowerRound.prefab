@@ -67,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 1789966618072384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 4170822491707510}
   m_RootOrder: 1
@@ -115,7 +115,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1e49bdd61eff7b84eacdc6ef6c0259f1, type: 2}
+  - {fileID: 2100000, guid: af93374e9bea9374fad23d96df90854f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,4 +167,4 @@ MonoBehaviour:
   ParticleDrag: 0.3
   ParticleWindDrag: 0.2
   SpringConstant: 20
-  SpringDistance: 0.04
+  SpringDistance: 0.12
