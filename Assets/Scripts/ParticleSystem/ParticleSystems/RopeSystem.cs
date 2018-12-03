@@ -33,7 +33,7 @@ public class RopeSystem : ParticleSystemCustom {
     state = new Vector3[numParticles * 2];
 
     for (int i = 0; i < numParticles; ++i)
-      state[i] = new Vector3(i, 0, 0); // x
+      state[i] = transform.position + Random.onUnitSphere * 0.1f; // x
 
     for (int i = numParticles; i < numParticles * 2; ++i)
       state[i] = new Vector3(); // v

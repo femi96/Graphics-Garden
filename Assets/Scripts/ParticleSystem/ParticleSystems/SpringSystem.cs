@@ -39,7 +39,7 @@ public class SpringSystem : ParticleSystemCustom {
   public void ResetParticle(int i) {
 
     // State is (x, v)
-    state[i] = transform.position + new Vector3(i, -i, 0); // x
+    state[i] = transform.position + Random.onUnitSphere * 0.1f; // x
     state[i + numParticles] = Vector3.zero; // v
 
     GameObject.Destroy(particlesObjs[i]);

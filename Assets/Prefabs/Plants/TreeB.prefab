@@ -57,7 +57,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e7e68a4e88780fe4c9ff636bf7ab0dbe, type: 2}
+  - {fileID: 2100000, guid: c1071fb70c4f79b418de6f635408ed1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,4 +103,3 @@ MonoBehaviour:
   angleDeg: 45
   leaf: {fileID: 1305468394531000, guid: 200d0a9054915df4393e210960e85b32, type: 2}
   branchStep: 7
-  leafStep: 11

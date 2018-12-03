@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824178807630422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.94, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4582424688279238}
@@ -268,7 +268,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5712256d825ca054291f058b3efb7599, type: 2}
+  - {fileID: 2100000, guid: 8ac577abf41f811428b4d98f3b700efb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -303,7 +303,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1e49bdd61eff7b84eacdc6ef6c0259f1, type: 2}
+  - {fileID: 2100000, guid: f64eb4c60d12c3b4680cee6dc4b04265, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -338,7 +338,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5712256d825ca054291f058b3efb7599, type: 2}
+  - {fileID: 2100000, guid: 8ac577abf41f811428b4d98f3b700efb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -373,7 +373,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5712256d825ca054291f058b3efb7599, type: 2}
+  - {fileID: 2100000, guid: 8ac577abf41f811428b4d98f3b700efb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -506,8 +506,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numParticles: 13
   fixedParticles: 00000000
+  particlesObjs: []
   particleObj: {fileID: 1259786070669802}
   Gravity: 10
   ParticleMass: 0.01
