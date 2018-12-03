@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour {
   /*
@@ -8,6 +9,7 @@ public class CameraController : MonoBehaviour {
   */
 
   public bool lookMode;  // Camera in look mode vs menu mode
+  public bool sceneManagerMode = false;
 
   private float x = 0.0f; // Current camera angles
   private float y = 30.0f;
@@ -23,10 +25,31 @@ public class CameraController : MonoBehaviour {
   private float distanceMin = 5f;     // Distance bounds
   private float distanceMax = 20f;
 
+  public int currentScene = -1;
+  private string[] scenes = new string[] {
+    "Showcase1_LSys",
+    "Showcase2_LSys",
+    "Showcase3_LSys",
+    "Showcase4_Particles",
+    "Showcase5_Boids",
+    "Showcase6_Flowers",
+    "Showcase7_Leaves",
+    "Showcase8_BigTree",
+    "Showcase9_Trees",
+    "Showcase10_TreesLeaves",
+    "Showcase11_TreesBees",
+    "Showcase12_TreesBirds",
+    "Showcase13_Aquarium",
+    "Showcase14_AquariumDark",
+    "Showcase15_BonusStar",
+  };
+  private bool prepSetActive = false;
+
   void Start() {
 
     // Lock cursor to screen
     SetCameraMode(true);
+    ChangeScene(0);
 
     // Camera positioning
     Vector3 angles = transform.eulerAngles;
@@ -36,13 +59,45 @@ public class CameraController : MonoBehaviour {
 
   void Update() {
 
-    if (Input.GetKeyDown(KeyCode.Escape))
-      lookMode = !lookMode;
+    if (prepSetActive) {
+      SceneManager.SetActiveScene(SceneManager.GetSceneByName(scenes[currentScene]));
+      prepSetActive = false;
+    }
+
+    // if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Escape))
+    //   lookMode = !lookMode;
+
+    if (Input.GetKeyDown(KeyCode.Space))
+      ChangeScene(currentScene); // Reload scene
+
+    if (Input.GetKeyDown(KeyCode.Q))
+      ChangeScene((currentScene - 1) % scenes.Length); // Prev scene
+
+    if (Input.GetKeyDown(KeyCode.E))
+      ChangeScene((currentScene + 1) % scenes.Length); // Next scene
+
 
     // Lock cursor to screen on input
     if (lookMode) {
       Cursor.lockState = CursorLockMode.Locked;
     }
+  }
+
+  private void ChangeScene(int nextScene) {
+    if (!sceneManagerMode)
+      return;
+
+    if (currentScene >= 0)
+      SceneManager.UnloadSceneAsync(scenes[currentScene]);
+
+    SceneManager.LoadScene(scenes[nextScene], LoadSceneMode.Additive);
+
+    if (nextScene == 13)
+      prepSetActive = true;
+    else
+      SceneManager.SetActiveScene(SceneManager.GetSceneByName("BaseScene"));
+
+    currentScene = nextScene;
   }
 
   void LateUpdate() {

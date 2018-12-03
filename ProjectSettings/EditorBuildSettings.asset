@@ -5,7 +5,55 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/TestScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/BaseScene.unity
+    guid: a50cbec99b7f39346803357e40e5dda0
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase1_LSys.unity
+    guid: c805b0c32ba61644f9337acaf5f1da3a
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase2_LSys.unity
+    guid: 98076a9bb0d4d6c42ae8f3730725d944
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase3_LSys.unity
+    guid: dd22aefba3352684690e08e95a18babc
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase4_Particles.unity
+    guid: 0ab400ab6ffb64749a78cfb0a7a95f8f
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase5_Boids.unity
+    guid: b7e5b5f48d07a8c4a899be0c3cae552f
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase6_Flowers.unity
+    guid: d4d9e110d4144944193f88b2e6f7fbc0
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase7_Leaves.unity
+    guid: ea230140e6d9aa544842d0b7909b651d
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase8_BigTree.unity
+    guid: 0a7e5be4114fdbe43a6f8a863ea14d8f
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase9_Trees.unity
+    guid: 7a1b57cd52683484a9d3fc845842dfba
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase10_TreesLeaves.unity
+    guid: efd459e8a35bcdb44868d9fec79124dc
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase11_TreesBees.unity
+    guid: c0fd57100b54fd04a9a109eb8b8421d9
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase12_TreesBirds.unity
+    guid: 114cff9684edd5e4db2eab4534dc0075
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase13_Aquarium.unity
+    guid: 0c2b83fe6b07d994693d9bc1a8c43174
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase14_AquariumDark.unity
+    guid: d64c5c3e016eac54a8d8f28d35f17591
+  - enabled: 1
+    path: Assets/Scenes/Showcase/Showcase15_BonusStar.unity
+    guid: 36fd3112dbdd9e34bb6e75f3db975301
   m_configObjects: {}

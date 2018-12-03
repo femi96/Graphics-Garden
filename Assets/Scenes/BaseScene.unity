@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 322005267}
   - component: {fileID: 322005266}
-  - component: {fileID: 322005265}
   - component: {fileID: 322005264}
   - component: {fileID: 322005268}
   m_Layer: 0
@@ -132,14 +131,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &322005264
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 322005263}
-  m_Enabled: 1
---- !u!124 &322005265
+--- !u!124 &322005264
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -207,6 +199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookMode: 0
+  sceneManagerMode: 1
+  currentScene: -1
 --- !u!1 &931430996
 GameObject:
   m_ObjectHideFlags: 0

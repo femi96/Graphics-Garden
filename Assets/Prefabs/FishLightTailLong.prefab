@@ -512,8 +512,8 @@ MonoBehaviour:
   fixedParticles: 00000000
   particlesObjs: []
   particleObj: {fileID: 1259786070669802}
-  Gravity: 10
-  ParticleMass: 0.01
-  ParticleDrag: 0.3
-  SpringConstant: 5
+  Gravity: 0
+  ParticleMass: 0.1
+  ParticleDrag: 1
+  SpringConstant: 4
   SpringDistance: 0.2
