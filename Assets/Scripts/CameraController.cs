@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour {
 
   private float distanceSpeed = 0.5f; // Distance change rate
   private float distanceMin = 5f;     // Distance bounds
-  private float distanceMax = 10f;
+  private float distanceMax = 20f;
 
   void Start() {
 

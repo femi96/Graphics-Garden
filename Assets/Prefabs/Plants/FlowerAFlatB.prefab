@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abaecdcf329c80d4e924a29558ecabed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steps: 3
+  steps: 2
   reset: 1
   segmentSides: 10
   meshScaleL: 0.4
