@@ -142,6 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numBoids: 50
   boidObj: {fileID: 1725348873108422, guid: 2b3ca8c854c300b46bf685b8280d5ac9, type: 2}
   BoidSpeed: 1.2
@@ -149,6 +151,7 @@ MonoBehaviour:
   FlockMinDistance: 0.6
   FlockMaxDistance: 1.5
   BoundaryDistance: 6
+  BoundaryFloor: 1
   WeightSeparation: 1
   WeightAlignment: 1
   WeightCohesion: 1
@@ -421,6 +424,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numBoids: 2
   boidObj: {fileID: 1824178807630422, guid: 24b229a66f496d849858413e49b8c151, type: 2}
   BoidSpeed: 2
@@ -428,6 +433,7 @@ MonoBehaviour:
   FlockMinDistance: 0.6
   FlockMaxDistance: 1
   BoundaryDistance: 7
+  BoundaryFloor: 1
   WeightSeparation: 1
   WeightAlignment: 1
   WeightCohesion: 1
@@ -477,6 +483,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: []
   reset: 1
+  ignoreWind: 0
+  windField: {fileID: 0}
   numBoids: 20
   boidObj: {fileID: 1838508682355952, guid: 8c809dee5e1688742abdc98029a2f5b4, type: 2}
   BoidSpeed: 1.2
@@ -484,6 +492,7 @@ MonoBehaviour:
   FlockMinDistance: 0.6
   FlockMaxDistance: 1.5
   BoundaryDistance: 6
+  BoundaryFloor: 1
   WeightSeparation: 1
   WeightAlignment: 1
   WeightCohesion: 1

@@ -36,6 +36,9 @@ public class CameraController : MonoBehaviour {
 
   void Update() {
 
+    if (Input.GetKeyDown(KeyCode.Escape))
+      lookMode = !lookMode;
+
     // Lock cursor to screen on input
     if (lookMode) {
       Cursor.lockState = CursorLockMode.Locked;
