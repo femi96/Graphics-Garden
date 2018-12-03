@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour {
 
   public bool lookMode;  // Camera in look mode vs menu mode
   public bool sceneManagerMode = false;
+  public GameObject dirLight;
 
   private float x = 0.0f; // Current camera angles
   private float y = 30.0f;
@@ -64,14 +65,21 @@ public class CameraController : MonoBehaviour {
       prepSetActive = false;
     }
 
-    // if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Escape))
-    //   lookMode = !lookMode;
+    if (Input.GetMouseButtonDown(0))
+      lookMode = true;
 
     if (Input.GetKeyDown(KeyCode.Space))
+      lookMode = !lookMode;
+
+    if (Input.GetKeyDown(KeyCode.W))
       ChangeScene(currentScene); // Reload scene
 
-    if (Input.GetKeyDown(KeyCode.Q))
-      ChangeScene((currentScene - 1) % scenes.Length); // Prev scene
+    if (Input.GetKeyDown(KeyCode.Q)) {
+      if (currentScene == 0)
+        ChangeScene((scenes.Length - 1) % scenes.Length); // Prev scene
+      else
+        ChangeScene((currentScene - 1) % scenes.Length); // Prev scene
+    }
 
     if (Input.GetKeyDown(KeyCode.E))
       ChangeScene((currentScene + 1) % scenes.Length); // Next scene
@@ -80,6 +88,10 @@ public class CameraController : MonoBehaviour {
     // Lock cursor to screen on input
     if (lookMode) {
       Cursor.lockState = CursorLockMode.Locked;
+      Cursor.visible = false;
+    } else {
+      Cursor.lockState = CursorLockMode.None;
+      Cursor.visible = true;
     }
   }
 
@@ -92,10 +104,13 @@ public class CameraController : MonoBehaviour {
 
     SceneManager.LoadScene(scenes[nextScene], LoadSceneMode.Additive);
 
-    if (nextScene == 13)
+    if (nextScene == 13) {
       prepSetActive = true;
-    else
+      dirLight.SetActive(false);
+    } else {
       SceneManager.SetActiveScene(SceneManager.GetSceneByName("BaseScene"));
+      dirLight.SetActive(true);
+    }
 
     currentScene = nextScene;
   }
