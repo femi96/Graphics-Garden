@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookMode: 0
   sceneManagerMode: 1
-  light: {fileID: 931430996}
+  dirLight: {fileID: 931430996}
   currentScene: -1
 --- !u!1 &482780424
 GameObject:
