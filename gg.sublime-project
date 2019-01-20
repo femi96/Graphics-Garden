@@ -2,36 +2,32 @@
 	"folders":
 	[
 		{
-			"follow_symlinks": true,
-			"path": "Assets/Scripts",
 			"file_exclude_patterns":
 			[
 				"*.dll",
 				"*.meta"
-			]
+			],
+			"path": "Assets/Scripts"
+		},
+		{
+			"path": "Assets/Shaders"
 		}
 	],
-
-	"solution_file": "./gg.sln",
-
 	"settings":
 	{
 		"AStyleFormatter":
-		{	
+		{
 			"autoformat_on_save": true,
 			"options_default":
 			{
-				"style": "google",
-
-				// Indentation options
+				"break-blocks": "default",
 				"indent": "spaces",
 				"indent-spaces": 2,
-
-				// Padding options
-				"break-blocks": "default",
 				"pad-oper": true,
-				"unpad-paren": true,
+				"style": "google",
+				"unpad-paren": true
 			}
 		}
-	}
+	},
+	"solution_file": "./gg.sln"
 }
