@@ -97,8 +97,6 @@ public class Chunk : MonoBehaviour {
         }
       }
     } else {
-
-
       for (int j = 0; j < NumNodes; j++) {
         for (int i = 0; i < NumNodes; i++) {
           Vector3 v = new Vector3(i * nodeDistance, heights[i, j], j * nodeDistance);
