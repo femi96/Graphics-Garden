@@ -55,3 +55,6 @@ MonoBehaviour:
   chunkPrefab: {fileID: 1705953897610168, guid: 56e94b0b569ab4e34910154862581ee3,
     type: 2}
   reset: 1
+  smoothChunk: 0
+  chunkRangeLoad: 100
+  chunkRangeUnload: 100

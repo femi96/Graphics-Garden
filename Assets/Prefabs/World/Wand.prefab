@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 4655263038749026}
+  moveSpeed: 10
 --- !u!114 &114506223197665558
 MonoBehaviour:
   m_ObjectHideFlags: 1

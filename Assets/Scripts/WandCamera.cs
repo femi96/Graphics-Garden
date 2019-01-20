@@ -52,8 +52,9 @@ public class WandCamera : MonoBehaviour {
   }
 
   void LateUpdate() {
-
+    float delta = (targetPos + transform.position).magnitude;
     float targetStep = targetMaxSpeed * Time.deltaTime;
+    targetStep *= 1 + Mathf.Max(0, delta - targetMaxSpeed) / targetMaxSpeed;
     targetPos = Vector3.MoveTowards(targetPos, transform.parent.position, targetStep);
 
     // Don't move camera if in menu

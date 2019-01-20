@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour {
 
-  public static int NumNodes = 11;
+  public static int NumNodes = 6;
   public static float Size = 10f;
   private float nodeDistance;
 

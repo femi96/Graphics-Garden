@@ -259,6 +259,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114058292535263106, guid: 205396f59c24e4a9385d46a7c18efcb1,
+        type: 2}
+      propertyPath: loadTarget
+      value: 
+      objectReference: {fileID: 1839594425}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 205396f59c24e4a9385d46a7c18efcb1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1839594425 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1570717876218812, guid: 5cfb8c0e959e941ea8564d5f38a591e5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1663167539}
