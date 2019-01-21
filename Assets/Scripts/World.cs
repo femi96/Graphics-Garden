@@ -8,6 +8,7 @@ public enum Biome {
   Tundra, Taiga, Icefield,
   Icefloat, Water, Tropics,
   Icecap, Mountain,
+  Beach, Shore,
 };
 
 public class World : MonoBehaviour {
@@ -22,7 +23,7 @@ public class World : MonoBehaviour {
   public float chunkRangeLoad = 50f;
   public float chunkRangeUnload = 100f;
 
-  private const int ChunksLoadPerFrame = 50;
+  private const int ChunksLoadPerFrame = 10;
 
   private Dictionary<Vector2Int, GameObject> chunks;
 
@@ -170,7 +171,7 @@ public class World : MonoBehaviour {
     float tm = GetTemperature(v);
     float hu = GetHumidity(v);
 
-    if (ht <= 2f) {
+    if (ht <= -2f) {
       // Low heights
       if (tm <= 0) {
         return Biome.Icefloat;
@@ -179,7 +180,13 @@ public class World : MonoBehaviour {
       } else {
         return Biome.Tropics;
       }
-
+    } else if (ht <= 2f) {
+      // Shore heights
+      if (hu <= 50 && tm >= 10) {
+        return Biome.Beach;
+      } else {
+        return Biome.Shore;
+      }
     } else if (ht <= 50f) {
       // Mid heights
       if (tm <= -10) {

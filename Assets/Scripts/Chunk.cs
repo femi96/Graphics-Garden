@@ -238,6 +238,14 @@ public class Chunk : MonoBehaviour {
     case Biome.Mountain:
       i = 3; j = 3;
       break;
+
+    case Biome.Beach:
+      i = 1; j = 0;
+      break;
+
+    case Biome.Shore:
+      i = 0; j = 3;
+      break;
     }
 
     return new int[2] { i, j };

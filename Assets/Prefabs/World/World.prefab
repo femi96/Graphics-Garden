@@ -62,7 +62,7 @@ MonoBehaviour:
   blocks: 0
   offset: 10
   noiseLayers:
-  - {x: 0, y: 0.0003, z: 1}
+  - {x: 20, y: 0.0003, z: 1}
   - {x: 30, y: 0.0024, z: 11}
   - {x: 30, y: 0.0048, z: 8.57}
   - {x: 10, y: 0.0096, z: 7}
