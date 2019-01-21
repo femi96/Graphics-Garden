@@ -51,7 +51,7 @@ public class WandMover : MonoBehaviour {
   }
 
   private void LimitWandPosition() {
-    transform.position -= Vector3.up * (transform.position.y - world.GetHeight(transform.position));
-    shape.position -= Vector3.up * (shape.position.y - (0.2f + world.GetHeight(transform.position)));
+    transform.position -= Vector3.up * (transform.position.y - Mathf.Max(0, world.GetHeight(transform.position)));
+    shape.position = transform.position + Vector3.up * 0.2f;
   }
 }

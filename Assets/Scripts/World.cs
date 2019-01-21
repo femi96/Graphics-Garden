@@ -134,6 +134,7 @@ public class World : MonoBehaviour {
 
   public float GetTemperature(Vector3 v) {
     Vector3 u = Vector3.up;
+    v = v - u * v.y;
     float output = 10f + 60f * Perlin.Noise(v * 0.00125f + u * 13f);
     float ht = GetHeight(v);
 
@@ -152,6 +153,7 @@ public class World : MonoBehaviour {
 
   public float GetHumidity(Vector3 v) {
     Vector3 u = Vector3.up;
+    v = v - u * v.y;
     float output = 50f + 100f * Perlin.Noise(v * 0.00125f + u * 19f);
     float ht = GetHeight(v);
 
@@ -168,7 +170,7 @@ public class World : MonoBehaviour {
     float tm = GetTemperature(v);
     float hu = GetHumidity(v);
 
-    if (ht <= 0f) {
+    if (ht <= 2f) {
       // Low heights
       if (tm <= 0) {
         return Biome.Icefloat;
@@ -180,7 +182,7 @@ public class World : MonoBehaviour {
 
     } else if (ht <= 50f) {
       // Mid heights
-      if (tm <= -20) {
+      if (tm <= -10) {
         return Biome.Icefield;
       } else if (tm <= 0) {
         if (hu <= 50) {
@@ -191,7 +193,7 @@ public class World : MonoBehaviour {
       } else if (tm <= 25) {
         if (hu <= 20) {
           return Biome.Steppes;
-        } else if (hu <= 50) {
+        } else if (hu <= 80) {
           return Biome.Plains;
         } else {
           return Biome.Swamp;

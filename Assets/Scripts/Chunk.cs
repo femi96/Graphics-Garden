@@ -139,12 +139,32 @@ public class Chunk : MonoBehaviour {
     int i = 0;
     int j = 0;
 
-    if (biomes[0] == Biome.Jungle)
-      i = 1;
+    Dictionary<Biome, int> biomeCount = new Dictionary<Biome, int>();
+
+    foreach (Biome biome in biomes) {
+      if (!biomeCount.ContainsKey(biome))
+        biomeCount[biome] = 1;
+      else
+        biomeCount[biome] += 1;
+    }
+
+    int maxCount = 0;
+    Biome maxBiome = biomes[0];
+
+    foreach (KeyValuePair<Biome, int> entry in biomeCount) {
+      if (entry.Value > maxCount) {
+        maxCount = entry.Value;
+        maxBiome = entry.Key;
+      }
+    }
+
+    int[] uv = GetUV(maxBiome);
+    i = uv[0];
+    j = uv[1];
 
     int f = 128;
     int b = 32;
-    float s = 256f;
+    float s = 512f;
 
     int x0 = i * f + b;
     int x1 = (i + 1) * f - b;
@@ -156,5 +176,70 @@ public class Chunk : MonoBehaviour {
     newUV.Add(new Vector2(x1 / s, y0 / s));
     newUV.Add(new Vector2(x1 / s, y1 / s));
     newUV.Add(new Vector2((x0 + x1) / (2 * s), (y0 + y1) / (2 * s)));
+  }
+
+  private int[] GetUV(Biome biome) {
+    int i = 0;
+    int j = 0;
+
+    switch (biome) {
+    case Biome.Steppes:
+      i = 0; j = 0;
+      break;
+
+    case Biome.Plains:
+      i = 0; j = 1;
+      break;
+
+    case Biome.Swamp:
+      i = 0; j = 2;
+      break;
+
+    case Biome.Water:
+      i = 0; j = 3;
+      break;
+
+    case Biome.Desert:
+      i = 1; j = 0;
+      break;
+
+    case Biome.Savanna:
+      i = 1; j = 1;
+      break;
+
+    case Biome.Jungle:
+      i = 1; j = 2;
+      break;
+
+    case Biome.Tropics:
+      i = 1; j = 3;
+      break;
+
+    case Biome.Tundra:
+      i = 2; j = 0;
+      break;
+
+    case Biome.Taiga:
+      i = 2; j = 1;
+      break;
+
+    case Biome.Icefield:
+      i = 2; j = 2;
+      break;
+
+    case Biome.Icefloat:
+      i = 2; j = 3;
+      break;
+
+    case Biome.Icecap:
+      i = 3; j = 2;
+      break;
+
+    case Biome.Mountain:
+      i = 3; j = 3;
+      break;
+    }
+
+    return new int[2] { i, j };
   }
 }
