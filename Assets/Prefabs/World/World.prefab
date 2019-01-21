@@ -54,7 +54,19 @@ MonoBehaviour:
   loadTarget: {fileID: 0}
   chunkPrefab: {fileID: 1705953897610168, guid: 56e94b0b569ab4e34910154862581ee3,
     type: 2}
-  reset: 1
+  chunkContainer: {fileID: 0}
+  reset: 0
   smoothChunk: 0
-  chunkRangeLoad: 100
-  chunkRangeUnload: 100
+  chunkRangeLoad: 300
+  chunkRangeUnload: 300
+  blocks: 0
+  offset: 10
+  noiseLayers:
+  - {x: 0, y: 0.0003, z: 1}
+  - {x: 30, y: 0.0024, z: 11}
+  - {x: 30, y: 0.0048, z: 8.57}
+  - {x: 10, y: 0.0096, z: 7}
+  - {x: 2, y: 0.0192, z: 17}
+  - {x: 2, y: 0.0384, z: 23}
+  - {x: 2, y: 0.0768, z: 41}
+  - {x: 0, y: 0.1536, z: 9}

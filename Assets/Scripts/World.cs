@@ -6,12 +6,15 @@ public class World : MonoBehaviour {
 
   public GameObject loadTarget;
   public GameObject chunkPrefab;
+  public Transform chunkContainer;
 
-  public bool reset = true;
+  public bool reset = false;
   public bool smoothChunk = false;
 
   public float chunkRangeLoad = 50f;
   public float chunkRangeUnload = 100f;
+
+  private const int ChunksLoadPerFrame = 50;
 
   private Dictionary<Vector2Int, GameObject> chunks;
 
@@ -25,6 +28,12 @@ public class World : MonoBehaviour {
 
     // Unload chunks out of range
     UnloadChunksInRange();
+
+    // Reset
+    if (reset) {
+      reset = false;
+      UnloadAllChunks();
+    }
   }
 
   private Vector2Int PosToKey(Vector3 v) {
@@ -38,6 +47,7 @@ public class World : MonoBehaviour {
   private void LoadChunksInRange() {
     int range = Mathf.CeilToInt(chunkRangeLoad / Chunk.Size);
     Vector3 target = loadTarget.transform.position;
+    int loaded = 0;
 
     for (int i = -range; i <= range; i++) {
       for (int j = -range; j <= range; j++) {
@@ -53,9 +63,12 @@ public class World : MonoBehaviour {
         if (dist >= chunkRangeLoad)
           continue;
 
-        GameObject go = Instantiate(chunkPrefab, v, Quaternion.identity, transform);
+        GameObject go = Instantiate(chunkPrefab, v, Quaternion.identity, chunkContainer);
         chunks.Add(PosToKey(go.transform.position), go);
-        return;
+        loaded += 1;
+
+        if (loaded >= ChunksLoadPerFrame)
+          return;
       }
     }
   }
@@ -71,7 +84,17 @@ public class World : MonoBehaviour {
         toUnloadKeys.Add(entry.Key);
     }
 
-    Debug.Log(toUnloadKeys.Count);
+    foreach (Vector2Int k in toUnloadKeys) {
+      Destroy(chunks[k]);
+      chunks.Remove(k);
+    }
+  }
+
+  private void UnloadAllChunks() {
+    List<Vector2Int> toUnloadKeys = new List<Vector2Int>();
+
+    foreach (KeyValuePair<Vector2Int, GameObject> entry in chunks)
+      toUnloadKeys.Add(entry.Key);
 
     foreach (Vector2Int k in toUnloadKeys) {
       Destroy(chunks[k]);
@@ -79,10 +102,23 @@ public class World : MonoBehaviour {
     }
   }
 
+  public float blocks = 1f, offset = 10f;
+  public Vector3[] noiseLayers;
+
   public float GetHeight(Vector3 v) {
-    v = v - Vector3.up * v.y;
-    return 8f * (Perlin.Noise(v * 0.05f) + 0.5f);
-    // return v.magnitude;
+    float output = 0f;
+    Vector3 u = Vector3.up;
+    v = v - u * v.y;
+
+    output += offset;
+
+    foreach (Vector3 a in noiseLayers)
+      output += a.x * Perlin.Noise(v * a.y + u * a.z);
+
+    if (blocks != 0f)
+      output = blocks * Mathf.RoundToInt(output / blocks);
+
+    return output;
   }
 
   public float GetTemperature(Vector3 v) {
