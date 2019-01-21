@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257743738756238}
   - component: {fileID: 114149641423909366}
+  - component: {fileID: 114001202135111288}
   m_Layer: 0
   m_Name: Wand
   m_TagString: Untagged
@@ -218,6 +219,18 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1936305055432140}
   m_Enabled: 1
+--- !u!114 &114001202135111288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570717876218812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277067da01ea942bd9fa80cee33820cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!114 &114149641423909366
 MonoBehaviour:
   m_ObjectHideFlags: 1
