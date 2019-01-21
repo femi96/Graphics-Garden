@@ -257,6 +257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuMode: 0
   targetMaxSpeed: 10
+  distanceMin: 3
+  distanceMax: 30
 --- !u!124 &124082971238539566
 Behaviour:
   m_ObjectHideFlags: 1

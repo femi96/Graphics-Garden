@@ -16,6 +16,7 @@ public class Chunk : MonoBehaviour {
   private float[,] heights;
   private float[,] temps;
   private float[,] humids;
+  private Biome[,] biomes;
 
   void Start() {
     nodeDistance = Size / (NumNodes - 1);
@@ -27,6 +28,7 @@ public class Chunk : MonoBehaviour {
     heights = new float[NumNodes, NumNodes];
     temps = new float[NumNodes, NumNodes];
     humids = new float[NumNodes, NumNodes];
+    biomes = new Biome[NumNodes, NumNodes];
 
     UpdateMesh();
   }
@@ -41,6 +43,7 @@ public class Chunk : MonoBehaviour {
         heights[i, j] = world.GetHeight(v);
         temps[i, j] = world.GetTemperature(v);
         humids[i, j] = world.GetHumidity(v);
+        biomes[i, j] = world.GetBiome(v);
       }
     }
 
@@ -73,11 +76,14 @@ public class Chunk : MonoBehaviour {
           newVertices.Add(v11);
           newVertices.Add(vc_);
 
-          newUV.Add(new Vector2(0, 0));
-          newUV.Add(new Vector2(0, 0));
-          newUV.Add(new Vector2(0, 0));
-          newUV.Add(new Vector2(0, 0));
-          newUV.Add(new Vector2(0, 0));
+          Biome[] biomesQuad = new Biome[5] {
+            biomes[i + 0, j + 0],
+            biomes[i + 0, j + 1],
+            biomes[i + 1, j + 0],
+            biomes[i + 1, j + 1],
+            world.GetBiome(vc_),
+          };
+          AddUV(newUV, biomesQuad);
 
           newTriangles.Add(k00);
           newTriangles.Add(k01);
@@ -127,5 +133,28 @@ public class Chunk : MonoBehaviour {
     mesh.RecalculateNormals();
 
     mf.mesh = mesh;
+  }
+
+  public void AddUV(List<Vector2> newUV, Biome[] biomes) {
+    int i = 0;
+    int j = 0;
+
+    if (biomes[0] == Biome.Jungle)
+      i = 1;
+
+    int f = 128;
+    int b = 32;
+    float s = 256f;
+
+    int x0 = i * f + b;
+    int x1 = (i + 1) * f - b;
+    int y0 = j * f + b;
+    int y1 = (j + 1) * f - b;
+
+    newUV.Add(new Vector2(x0 / s, y0 / s));
+    newUV.Add(new Vector2(x0 / s, y1 / s));
+    newUV.Add(new Vector2(x1 / s, y0 / s));
+    newUV.Add(new Vector2(x1 / s, y1 / s));
+    newUV.Add(new Vector2((x0 + x1) / (2 * s), (y0 + y1) / (2 * s)));
   }
 }

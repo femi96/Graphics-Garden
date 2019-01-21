@@ -24,7 +24,7 @@ public class WandCamera : MonoBehaviour {
 
   private float distanceSpeed = 0.5f; // Distance change rate
   private float distanceMin = 3f;     // Distance bounds
-  private float distanceMax = 10f;
+  private float distanceMax = 30f;
 
   void Start() {
 

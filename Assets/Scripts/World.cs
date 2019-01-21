@@ -134,7 +134,7 @@ public class World : MonoBehaviour {
 
   public float GetTemperature(Vector3 v) {
     Vector3 u = Vector3.up;
-    float output = 5f + 35f * Perlin.Noise(v * 0.00125f + u * 13f);
+    float output = 10f + 60f * Perlin.Noise(v * 0.00125f + u * 13f);
     float ht = GetHeight(v);
 
     float heightCooling = ht;
