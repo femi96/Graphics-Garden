@@ -502,12 +502,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114373226697159006, guid: 4daf421318b6b48c2ae0a01849a84baf,
-        type: 2}
-      propertyPath: flower
-      value: 
-      objectReference: {fileID: 1799331848560936, guid: f8f1a8ffee79647d3b5a629eb652eb55,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4daf421318b6b48c2ae0a01849a84baf, type: 2}
   m_IsPrefabParent: 0
@@ -560,11 +554,6 @@ Prefab:
       propertyPath: chunkContainer
       value: 
       objectReference: {fileID: 401637139}
-    - target: {fileID: 114058292535263106, guid: 205396f59c24e4a9385d46a7c18efcb1,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 205396f59c24e4a9385d46a7c18efcb1, type: 2}
   m_IsPrefabParent: 0

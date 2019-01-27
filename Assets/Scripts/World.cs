@@ -23,6 +23,9 @@ public class World : MonoBehaviour {
   public float chunkRangeLoad = 50f;
   public float chunkRangeUnload = 100f;
 
+  public float plantRangeLoad = 50f;
+  public float plantRangeUnload = 50f;
+
   private const int ChunksLoadPerFrame = 10;
 
   private Dictionary<Vector2Int, GameObject> chunks;
@@ -37,6 +40,12 @@ public class World : MonoBehaviour {
 
     // Unload chunks out of range
     UnloadChunksInRange();
+
+    // Load plants in range
+    LoadPlantsInRange();
+
+    // Unload plants out of range
+    UnloadPlantsInRange();
 
     // Reset
     if (reset) {
@@ -96,6 +105,28 @@ public class World : MonoBehaviour {
     foreach (Vector2Int k in toUnloadKeys) {
       Destroy(chunks[k]);
       chunks.Remove(k);
+    }
+  }
+
+  private void LoadPlantsInRange() {
+    Vector3 target = loadTarget.transform.position;
+
+    foreach (KeyValuePair<Vector2Int, GameObject> entry in chunks) {
+      float dist = (entry.Value.transform.position - target).magnitude;
+
+      if (dist < plantRangeLoad)
+        entry.Value.GetComponent<Chunk>().SetPlants(true);
+    }
+  }
+
+  private void UnloadPlantsInRange() {
+    Vector3 target = loadTarget.transform.position;
+
+    foreach (KeyValuePair<Vector2Int, GameObject> entry in chunks) {
+      float dist = (entry.Value.transform.position - target).magnitude;
+
+      if (dist >= plantRangeUnload)
+        entry.Value.GetComponent<Chunk>().SetPlants(false);
     }
   }
 

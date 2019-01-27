@@ -97,8 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steps: 4
   reset: 1
-  segmentSides: 4
-  meshScaleL: 0.1
+  segmentSides: 3
+  meshScaleL: 0.2
   meshScaleW: 0.1
   angleDeg: 25
   leaf: {fileID: 1799331848560936, guid: f8f1a8ffee79647d3b5a629eb652eb55, type: 2}

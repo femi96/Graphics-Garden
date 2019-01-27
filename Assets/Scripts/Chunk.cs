@@ -13,6 +13,9 @@ public class Chunk : MonoBehaviour {
   private MeshCollider mc;
   private World world;
 
+  public Transform plantContainer;
+  private bool hasPlants = false;
+
   void Start() {
     nodeDistance = Size / (NumNodes - 1);
 
@@ -21,7 +24,6 @@ public class Chunk : MonoBehaviour {
     world = GameObject.Find("World").GetComponent<World>();
 
     UpdateMesh();
-    PlacePlants();
   }
 
   private void UpdateMesh() {
@@ -248,6 +250,20 @@ public class Chunk : MonoBehaviour {
   }
 
   public GameObject plantPrefab;
+
+  public void SetPlants(bool plantStatus) {
+    if (!hasPlants && plantStatus) {
+      PlacePlants();
+    }
+
+    if (hasPlants && !plantStatus) {
+
+      foreach (Transform child in plantContainer)
+        Destroy(child.gameObject);
+    }
+
+    hasPlants = plantStatus;
+  }
 
   private void PlacePlants() {
     for (int i = 0; i < 3; i++) {
