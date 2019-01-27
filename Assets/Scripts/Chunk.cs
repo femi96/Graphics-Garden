@@ -13,11 +13,6 @@ public class Chunk : MonoBehaviour {
   private MeshCollider mc;
   private World world;
 
-  private float[,] heights;
-  private float[,] temps;
-  private float[,] humids;
-  private Biome[,] biomes;
-
   void Start() {
     nodeDistance = Size / (NumNodes - 1);
 
@@ -25,16 +20,17 @@ public class Chunk : MonoBehaviour {
     // mr = GetComponent<MeshRenderer>();
     world = GameObject.Find("World").GetComponent<World>();
 
-    heights = new float[NumNodes, NumNodes];
-    temps = new float[NumNodes, NumNodes];
-    humids = new float[NumNodes, NumNodes];
-    biomes = new Biome[NumNodes, NumNodes];
-
     UpdateMesh();
+    PlacePlants();
   }
 
   private void UpdateMesh() {
     Vector3 baseV = transform.position;
+
+    float[,] heights = new float[NumNodes, NumNodes];
+    float[,] temps = new float[NumNodes, NumNodes];
+    float[,] humids = new float[NumNodes, NumNodes];
+    Biome[,] biomes = new Biome[NumNodes, NumNodes];
 
     // Fill values
     for (int i = 0; i < NumNodes; i++) {
@@ -249,5 +245,24 @@ public class Chunk : MonoBehaviour {
     }
 
     return new int[2] { i, j };
+  }
+
+  public GameObject plantPrefab;
+
+  private void PlacePlants() {
+    for (int i = 0; i < 3; i++) {
+      Vector3 v = new Vector3(0, 0, 0);
+      v += transform.position;
+      float x = Size * (0.5f + Perlin.Noise(0.07f * v + 5f * i * Vector3.up));
+      float z = Size * (0.5f + Perlin.Noise(0.05f * v + 7f * i * Vector3.up));
+      v += new Vector3(x, 0, z);
+      v += Vector3.up * world.GetHeight(v);
+      GameObject plantPrefab = GetPlant(v);
+      Instantiate(plantPrefab, v, Quaternion.identity, transform);
+    }
+  }
+
+  private GameObject GetPlant(Vector3 v) {
+    return plantPrefab;
   }
 }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1895361900264190}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 236cd8e2c64824d02b7218d7d4db6895, type: 3}
   m_Name: 
@@ -57,8 +57,8 @@ MonoBehaviour:
   chunkContainer: {fileID: 0}
   reset: 0
   smoothChunk: 0
-  chunkRangeLoad: 200
-  chunkRangeUnload: 300
+  chunkRangeLoad: 10
+  chunkRangeUnload: 200
   blocks: 0
   offset: 10
   noiseLayers:

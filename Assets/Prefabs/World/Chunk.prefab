@@ -168,3 +168,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fc58034dc5941c2bda092f2dcd7ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 1674778594602622, guid: 4daf421318b6b48c2ae0a01849a84baf,
+    type: 2}
