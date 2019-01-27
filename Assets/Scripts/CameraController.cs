@@ -108,7 +108,7 @@ public class CameraController : MonoBehaviour {
       prepSetActive = true;
       dirLight.SetActive(false);
     } else {
-      SceneManager.SetActiveScene(SceneManager.GetSceneByName("BaseScene"));
+      SceneManager.SetActiveScene(SceneManager.GetSceneByName("ShowcaseBaseScene"));
       dirLight.SetActive(true);
     }
 
